@@ -79,6 +79,15 @@
       <input type="number" name="sq_ft_to" value="" placeholder="Sq Ft To">
       <input type="number" name="price_from" value="" placeholder="Price From">
       <input type="number" name="price_to" value="" placeholder="Price To">
+      <select name="orderby">
+        <option value="">Order By</option>
+        <option value="most_recent">Most recent</option>
+        <option value="most_previous">Most previous</option>
+        <option value="price_h_l">Price high to low</option>
+        <option value="price_l_h">Price low to high</option>
+        <option value="feet_h_l">Sq ft high to low</option>
+        <option value="feet_l_h">Sq ft low to high</option>
+      </select>
       <input type="submit" name="search" value="Search">
     </form>
     <table>
@@ -115,7 +124,7 @@
         <td>{{$p->status}}</td>
         <td>{{$p->no_of_clicks}}</td>
         <td>{{$p->date}}</td>
-        <td>{{$p->username}}</td>
+        <td><a href="{{route('adminHome.customerDetail', $p->username)}}">{{$p->username}}</a> </td>
       </tr>
       @endforeach
     </table>

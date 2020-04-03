@@ -26,6 +26,56 @@ class AdminHomeController extends Controller
       }
     }
 
+    public function customerDetail($username){
+      $customer = DB::table('customer')
+                     ->where('username', $username)
+                     ->get()->first();
+      if ($customer!=null) {
+         return view('adminHome.customerDetail',['customer'=> $customer]);
+        }else {
+         return redirect('/adminHome');
+        }
+    }
+
+    public function activePosts($username){
+      $property = DB::table('property')
+                  ->where('username', $username)
+                  ->where('status', 'allowed')
+                  ->get();
+      if ($property!=null) {
+        return view('adminHome.activePosts', ['property'=>$property]);
+      }
+    }
+
+    public function pendingPosts($username){
+      $property = DB::table('property')
+                  ->where('username', $username)
+                  ->where('status', 'pending')
+                  ->get();
+      if ($property!=null) {
+        return view('adminHome.pendingPosts', ['property'=>$property]);
+      }
+    }
+
+    public function soldPosts($username){
+      $property = DB::table('property')
+                  ->where('username', $username)
+                  ->where('status', 'sold')
+                  ->get();
+      if ($property!=null) {
+        return view('adminHome.soldPosts', ['property'=>$property]);
+      }
+    }
+
+    public function totalPosts($username){
+      $property = DB::table('property')
+                  ->where('username', $username)
+                  ->get();
+      if ($property!=null) {
+        return view('adminHome.totalPosts', ['property'=>$property]);
+      }
+    }
+
     public function allProperty(){
       $property = DB::table('property')
                       ->get();
@@ -49,6 +99,7 @@ class AdminHomeController extends Controller
       $sq_ft_to = $req->sq_ft_to;
       $price_from = $req->price_from;
       $price_to = $req->price_to;
+      $orderby = $req->orderby;
 
       $query = DB::table('property')->select('property_id', 'title', 'property_price', 'property_area', 'p_type', 'style', 'bed', 'bath', 'feet', 'floor', 'description', 'status', 'no_of_clicks', 'date', 'username');
       if($title){
@@ -90,6 +141,26 @@ class AdminHomeController extends Controller
       }
       if ($price_to) {
         $query->where('property_price', '<=', $price_to);
+      }
+      if ($orderby) {
+        if ($orderby == "most_recent") {
+          $query->orderBy('date', 'desc');
+        }
+        if ($orderby == "most_previous") {
+          $query->orderBy('date', 'asc');
+        }
+        if ($orderby == "price_h_l") {
+          $query->orderBy('property_price', 'desc');
+        }
+        if ($orderby == "price_l_h") {
+          $query->orderBy('property_price', 'asc');
+        }
+        if ($orderby == "feet_h_l") {
+          $query->orderBy('feet', 'desc');
+        }
+        if ($orderby == "feet_l_h") {
+          $query->orderBy('feet', 'asc');
+        }
       }
       $query->orderBy('property_id', 'asc');
 

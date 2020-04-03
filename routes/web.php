@@ -26,3 +26,8 @@ Route::get('/adminHome', 'AdminHomeController@index')->name('adminHome.index');
 Route::get('/adminAllCustomer', 'AdminHomeController@allCustomer')->name('adminHome.allCustomer');
 Route::get('/adminAllProperty', 'AdminHomeController@allProperty')->name('adminHome.allProperty');
 Route::post('/adminAllProperty', 'AdminHomeController@searchProperty');
+Route::get('/customerDetail/{username}', 'AdminHomeController@customerDetail')->name('adminHome.customerDetail');
+Route::get('/activePosts/{username}', 'AdminHomeController@activePosts')->name('adminHome.activePosts');
+Route::get('/pendingPosts/{username}', 'AdminHomeController@pendingPosts')->name('adminHome.pendingPosts');
+Route::get('/soldPosts/{username}', 'AdminHomeController@soldPosts')->name('adminHome.soldPosts');
+Route::get('/totalPosts/{username}', 'AdminHomeController@totalPosts')->name('adminHome.totalPosts');
