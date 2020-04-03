@@ -31,3 +31,7 @@ Route::get('/activePosts/{username}', 'AdminHomeController@activePosts')->name('
 Route::get('/pendingPosts/{username}', 'AdminHomeController@pendingPosts')->name('adminHome.pendingPosts');
 Route::get('/soldPosts/{username}', 'AdminHomeController@soldPosts')->name('adminHome.soldPosts');
 Route::get('/totalPosts/{username}', 'AdminHomeController@totalPosts')->name('adminHome.totalPosts');
+// Route::get('/acceptPending/{property_id}', 'AdminHomeController@accept')->name('adminHome.acceptPending');
+// Route::get('/denyPending/{property_id}', 'AdminHomeController@deny')->name('adminHome.denyPending');
+Route::get('/accept/{property_id}', 'AdminHomeController@accept')->name('adminHome.accept');
+Route::get('/deny/{property_id}', 'AdminHomeController@deny')->name('adminHome.deny');

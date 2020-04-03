@@ -9,7 +9,15 @@ class AdminHomeController extends Controller
 {
     public function index(Request $req){
       if($req->session()->has('username')){
-        return view('adminHome.index');
+        $property = DB::table('property')
+                    ->where('status', 'pending')
+                    ->get();
+        if ($property!=null) {
+          return view('adminHome.index', ['property'=>$property]);
+        }else {
+          return redirect('/adminLogout');
+        }
+
       }else {
         return redirect('/adminLogin');
       }
@@ -86,6 +94,62 @@ class AdminHomeController extends Controller
       }
     }
 
+    public function accept($id){
+      $property = DB::table('property')
+                     ->where('property_id', $id)
+                     ->update(['status'=>'allowed']);
+      if ($property!=null) {
+        $customer = DB::table('customer')
+                       ->join('property', 'property.username', '=', 'customer.username')
+                       ->where('property.property_id', $id)
+                       ->increment('active_posts');
+        if ($customer!=null) {
+          return redirect('/adminHome');
+        }
+      }else {
+        return redirect('/adminLogin');
+      }
+    }
+
+    public function deny($id){
+      $property = DB::table('property')
+                     ->where('property_id', $id)
+                     ->update(['status'=>'denied']);
+      if ($property!=null) {
+        $customer = DB::table('customer')
+                       ->join('property', 'property.username', '=', 'customer.username')
+                       ->where('property.property_id', $id)
+                       ->increment('total_posts');
+        if ($customer!=null) {
+          return redirect('/adminHome');
+        }
+      }else {
+        return redirect('/adminLogin');
+      }
+    }
+/*
+    public function acceptPending($username){
+      $property = DB::table('property')
+                     ->where('username', $username)
+                     ->update(['status'=>'allowed']);
+      if ($property!=null) {
+        return redirect('/pendingPosts/{username}');
+      }else {
+        return redirect('/adminLogin');
+      }
+    }
+
+    public function denyPending($username){
+      $property = DB::table('property')
+                     ->where('username', $username)
+                     ->update(['status'=>'denied']);
+      if ($property!=null) {
+        return redirect('/pendingPosts/{username}');
+      }else {
+        return redirect('/adminLogin');
+      }
+    }
+*/
     public function searchProperty(Request $req){
       $title = $req->title;
       $location = $req->location;

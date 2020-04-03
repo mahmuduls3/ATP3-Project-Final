@@ -30,6 +30,7 @@
         <th>No. Of Clicks</th>
         <th>Posted Date</th>
         <th>Posted By</th>
+<!--        <th>Action</th>       -->
       </tr>
       @foreach($property as $p)
       <tr>
@@ -48,6 +49,11 @@
         <td>{{$p->no_of_clicks}}</td>
         <td>{{$p->date}}</td>
         <td><a href="{{route('adminHome.customerDetail', $p->username)}}">{{$p->username}}</a> </td>
+<!--      <td>
+          <a href="{{route('adminHome.acceptPending', $p->property_id)}}">Accept</a> |
+          <a href="{{route('adminHome.denyPending', $p->property_id)}}">Deny</a>
+        </td>
+-->
       </tr>
       @endforeach
     </table>
