@@ -7,12 +7,80 @@
   </head>
   <body>
     <h1>All Property List</h1><br><hr>
-    <a href="{{route('adminHome.index')}}">Home</a>
+    <a href="{{route('adminHome.index')}}">Home</a><br>
     <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
     <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
-    <a href="{{ URL::previous() }}">Back</a>
+    <a href="{{ URL::previous() }}">Back</a><br>
     <a href="{{route('adminLogout.index')}}">Logout</a>
     <br>
+    <form method="post">
+      {{csrf_field()}}
+      <h3>Search Property</h3>
+      <input type="text" name="title" value="" placeholder="Title">
+      <input type="text" name="location" value="" placeholder="Location">
+      <select name="type">
+        <option value="">Type</option>
+        <option value="apartment">Apartment</option>
+        <option value="flat">Flat</option>
+        <option value="house">House</option>
+        <option value="room">Room</option>
+        <option value="shop">Shop</option>
+      </select>
+      <select name="purpose">
+        <option value="">Purpose</option>
+        <option value="rent">Rent</option>
+        <option value="sell">Sell</option>
+      </select>
+      <select name="status">
+        <option value="">Status</option>
+        <option value="allowed">Allowed</option>
+        <option value="sold">Sold</option>
+        <option value="pending">Pending</option>
+        <option value="featured">Featured</option>
+        <option value="denied">Denied</option>
+      </select>
+      <select name="bed">
+        <option value="">Bed</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <select name="bath">
+        <option value="">Bath</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <select name="floor">
+        <option value="">Floor</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+      </select>
+      <input type="number" name="sq_ft_from" value="" placeholder="Sq Ft From">
+      <input type="number" name="sq_ft_to" value="" placeholder="Sq Ft To">
+      <input type="number" name="price_from" value="" placeholder="Price From">
+      <input type="number" name="price_to" value="" placeholder="Price To">
+      <input type="submit" name="search" value="Search">
+    </form>
     <table>
       <tr>
         <th>Id</th>

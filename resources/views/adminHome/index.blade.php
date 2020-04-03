@@ -7,10 +7,10 @@
   </head>
   <body>
     <h1>Welcome to Home Page, {{session('username')}}</h1><br><hr>
-    <a href="{{route('adminHome.index')}}">Home</a>
+    <a href="{{route('adminHome.index')}}">Home</a><br>
     <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
     <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
-    <a href="{{ URL::previous() }}">Back</a>
+    <a href="{{ URL::previous() }}">Back</a><br>
     <a href="{{route('adminLogout.index')}}">Logout</a>
     <br>
 

@@ -25,3 +25,4 @@ Route::get('/adminLogout', 'AdminLogoutController@index')->name('adminLogout.ind
 Route::get('/adminHome', 'AdminHomeController@index')->name('adminHome.index');
 Route::get('/adminAllCustomer', 'AdminHomeController@allCustomer')->name('adminHome.allCustomer');
 Route::get('/adminAllProperty', 'AdminHomeController@allProperty')->name('adminHome.allProperty');
+Route::post('/adminAllProperty', 'AdminHomeController@searchProperty');
