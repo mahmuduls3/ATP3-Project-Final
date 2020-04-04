@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/adminMain', 'AdminMainController@index')->name('adminMain.index');
+
+Route::get('/adminRegister', 'AdminRegisterController@index')->name('adminRegister.index');
+Route::post('/adminRegister', 'AdminRegisterController@verify');
 
 Route::get('/adminLogin', 'AdminLoginController@index')->name('adminLogin.index');
 Route::post('/adminLogin', 'AdminLoginController@verify');
