@@ -111,7 +111,7 @@
       @foreach($property as $p)
       <tr>
         <td>{{$p->property_id}}</td>
-        <td>{{$p->title}}</td>
+        <td><a href="{{route('adminHome.propertyDetail', $p->property_id)}}">{{$p->title}}</a></td>
         <td>{{$p->property_price}}</td>
         <td>{{$p->property_area}}</td>
         <td>{{$p->p_type}}</td>

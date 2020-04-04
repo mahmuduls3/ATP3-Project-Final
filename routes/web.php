@@ -28,6 +28,7 @@ Route::get('/adminLogout', 'AdminLogoutController@index')->name('adminLogout.ind
 
 Route::get('/adminHome', 'AdminHomeController@index')->name('adminHome.index');
 Route::get('/adminAllCustomer', 'AdminHomeController@allCustomer')->name('adminHome.allCustomer');
+Route::post('/adminAllCustomer', 'AdminHomeController@searchCustomer');
 Route::get('/adminAllProperty', 'AdminHomeController@allProperty')->name('adminHome.allProperty');
 Route::post('/adminAllProperty', 'AdminHomeController@searchProperty');
 Route::get('/customerDetail/{username}', 'AdminHomeController@customerDetail')->name('adminHome.customerDetail');
@@ -39,3 +40,4 @@ Route::get('/totalPosts/{username}', 'AdminHomeController@totalPosts')->name('ad
 // Route::get('/denyPending/{property_id}', 'AdminHomeController@deny')->name('adminHome.denyPending');
 Route::get('/accept/{property_id}', 'AdminHomeController@accept')->name('adminHome.accept');
 Route::get('/deny/{property_id}', 'AdminHomeController@deny')->name('adminHome.deny');
+Route::get('/propertyDetail/{property_id}', 'AdminHomeController@propertyDetail')->name('adminHome.propertyDetail');

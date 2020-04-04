@@ -45,10 +45,84 @@ class AdminHomeController extends Controller
         }
     }
 
+    public function searchCustomer(Request $req){
+      $username = $req->username;
+      $name = $req->name;
+      $phone = $req->phone;
+      $email = $req->email;
+      $type = $req->type;
+      $orderby = $req->orderby;
+      $query = DB::table('customer')->select('customer_id','c_image', 'username', 'name', 'type', 'phone', 'email', 'active_posts', 'pending_posts', 'sold_posts', 'total_posts');
+      if($username){
+        $query->where(function ($q) use ($username){
+          $q->where('username', 'like', "%$username%");
+        });
+      }
+      if($name){
+        $query->where(function ($q) use ($name){
+          $q->where('name', 'like', "%$name%");
+        });
+      }
+      if($phone){
+        $query->where(function ($q) use ($phone){
+          $q->where('phone', 'like', "%$phone%");
+        });
+      }
+      if($email){
+        $query->where(function ($q) use ($email){
+          $q->where('email', 'like', "%$email%");
+        });
+      }
+      if($type){
+        $query->where(function ($q) use ($type){
+          $q->where('type', '=', "$type");
+        });
+      }
+      if ($orderby) {
+        if ($orderby == "active_posts_l_h") {
+          $query->orderBy('active_posts', 'asc');
+        }
+        if ($orderby == "active_posts_h_l") {
+          $query->orderBy('active_posts', 'desc');
+        }
+        if ($orderby == "pending_posts_l_h") {
+          $query->orderBy('pending_posts', 'asc');
+        }
+        if ($orderby == "pending_posts_h_l") {
+          $query->orderBy('pending_posts', 'desc');
+        }
+        if ($orderby == "sold_posts_l_h") {
+          $query->orderBy('sold_posts', 'asc');
+        }
+        if ($orderby == "sold_posts_h_l") {
+          $query->orderBy('sold_posts', 'desc');
+        }
+        if ($orderby == "total_posts_l_h") {
+          $query->orderBy('total_posts', 'asc');
+        }
+        if ($orderby == "total_posts_h_l") {
+          $query->orderBy('total_posts', 'desc');
+        }
+      }
+      $customer = $query->get();
+      return view('adminHome.allCustomer', ['customer'=> $customer]);
+    }
+
+    public function propertyDetail($property_id){
+      $property = DB::table('property')
+                     ->where('property_id', $property_id)
+                     ->get()->first();
+      if ($property!=null) {
+         return view('adminHome.propertyDetail',['property'=> $property]);
+        }else {
+         return redirect('/adminHome');
+        }
+    }
+
     public function activePosts($username){
       $property = DB::table('property')
                   ->where('username', $username)
-                  ->where('status', 'allowed')
+                  ->whereIn('status', ['allowed', 'featured'])
                   ->get();
       if ($property!=null) {
         return view('adminHome.activePosts', ['property'=>$property]);
