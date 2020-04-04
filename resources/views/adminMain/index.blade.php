@@ -31,7 +31,7 @@
       @foreach($property as $p)
       <tr>
         <td>{{$p->property_id}}</td>
-        <td><a href="{{route('adminHome.propertyDetail', $p->property_id)}}">{{$p->title}}</a></td>
+        <td><a href="{{route('adminMain.propertyDetail', $p->property_id)}}">{{$p->title}}</a></td>
         <td>{{$p->property_price}}</td>
         <td>{{$p->property_area}}</td>
         <td>{{$p->p_type}}</td>
@@ -43,7 +43,7 @@
         <td>{{$p->description}}</td>
         <td>{{$p->no_of_clicks}}</td>
         <td>{{$p->date}}</td>
-        <td><a href="{{route('adminHome.customerDetail', $p->username)}}">{{$p->username}}</a> </td>
+        <td><a href="{{route('adminMain.customerDetail', $p->username)}}">{{$p->username}}</a> </td>
       </tr>
       @endforeach
     </table>

@@ -16,4 +16,26 @@ class AdminMainController extends Controller
         echo "error viewing main page";
       }
     }
+
+    public function customerDetail($username){
+      $customer = DB::table('customer')
+                     ->where('username', $username)
+                     ->get()->first();
+      if ($customer!=null) {
+         return view('adminMain.customerDetail',['customer'=> $customer]);
+        }else {
+         return redirect('/adminHome');
+        }
+    }
+
+    public function propertyDetail($property_id){
+      $property = DB::table('property')
+                     ->where('property_id', $property_id)
+                     ->get()->first();
+      if ($property!=null) {
+         return view('adminMain.propertyDetail',['property'=> $property]);
+        }else {
+         return redirect('/adminHome');
+        }
+    }
 }
