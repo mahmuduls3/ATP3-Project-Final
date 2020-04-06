@@ -16,5 +16,6 @@
       <input type="password" name="password" value="" placeholder="Password"><br>
       <input type="submit" name="login" value="Login">
     </form>
+    <h4>{{session('message')}}</h4>
   </body>
 </html>

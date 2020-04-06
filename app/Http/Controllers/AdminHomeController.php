@@ -113,10 +113,14 @@ class AdminHomeController extends Controller
                      ->where('property_id', $property_id)
                      ->get()->first();
       if ($property!=null) {
-         return view('adminHome.propertyDetail',['property'=> $property]);
-        }else {
-         return redirect('/adminHome');
+        if ($property->status == 'pending') {
+          return view('adminHome.pendingPropertyDetail',['property'=>$property]);
+        } else {
+          return view('adminHome.propertyDetail',['property'=> $property]);
         }
+      }else {
+        return redirect('/adminHome');
+      }
     }
 
     public function activePosts($username){

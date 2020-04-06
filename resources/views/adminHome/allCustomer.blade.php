@@ -63,10 +63,10 @@
         <td>{{$c->type}}</td>
         <td>{{$c->phone}}</td>
         <td>{{$c->email}}</td>
-        <td>{{$c->active_posts}}</td>
-        <td>{{$c->pending_posts}}</td>
-        <td>{{$c->sold_posts}}</td>
-        <td>{{$c->total_posts}}</td>
+        <td><a href="{{route('adminHome.activePosts', $c->username)}}"> {{$c->active_posts}}</a></td>
+        <td><a href="{{route('adminHome.pendingPosts', $c->username)}}"> {{$c->pending_posts}}</a></td>
+        <td><a href="{{route('adminHome.soldPosts', $c->username)}}"> {{$c->sold_posts}}</a></td>
+        <td><a href="{{route('adminHome.totalPosts', $c->username)}}"> {{$c->total_posts}}</a></td>
       </tr>
       @endforeach
     </table>
