@@ -39,7 +39,13 @@ class AdminHomeController extends Controller
                      ->where('username', $username)
                      ->get()->first();
       if ($customer!=null) {
-         return view('adminHome.customerDetail',['customer'=> $customer]);
+        $message = DB::table('message')
+                    ->where('from', $username)
+                    ->get();
+        if ($message!=null) {
+          return view('adminHome.customerDetail',['customer'=> $customer, 'message'=> $message]);
+        }
+
         }else {
          return redirect('/adminHome');
         }
@@ -308,5 +314,47 @@ class AdminHomeController extends Controller
 
       $property = $query->get();
       return view('adminHome.allProperty', ['property'=> $property]);
+    }
+
+    public function allMessage(){
+      $message = DB::table('message')
+                    ->select('message_id', 'from', 'to', 'msg', 'msg_date')
+                    ->get();
+      if ($message!=null) {
+        return view('adminHome.allMessage', ['message'=>$message]);
+      }
+    }
+
+    public function searchMessage(Request $req){
+      $from = $req->from;
+      $to = $req->to;
+      $msg = $req->msg;
+      $orderby = $req->orderby;
+      $query = DB::table('message')->select('message_id', 'from', 'to', 'msg', 'msg_date');
+      if($from){
+        $query->where(function ($q) use ($from){
+          $q->where('from', 'like', "%$from%");
+        });
+      }
+      if($to){
+        $query->where(function ($q) use ($to){
+          $q->where('to', 'like', "%$to%");
+        });
+      }
+      if($msg){
+        $query->where(function ($q) use ($msg){
+          $q->where('msg', 'like', "%$msg%");
+        });
+      }
+      if ($orderby) {
+        if ($orderby == "most_recent") {
+          $query->orderBy('message_id', 'desc');
+        }
+        if ($orderby == "most_previous") {
+          $query->orderBy('message_id', 'asc');
+        }
+      }
+      $message = $query->get();
+      return view('adminHome.allMessage', ['message'=> $message]);
     }
 }

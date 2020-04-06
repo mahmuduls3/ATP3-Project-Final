@@ -9,6 +9,7 @@
     <a href="{{route('adminHome.index')}}">Home</a><br>
     <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
     <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
+    <a href="{{route('adminHome.allMessage')}}">All Message</a><br>
     <a href="{{ URL::previous() }}">Back</a><br>
     <a href="{{route('adminLogout.index')}}">Logout</a>
     <br>
@@ -57,6 +58,25 @@
         <td>Total Posts</td>
         <td><a href="{{route('adminHome.totalPosts', $customer->username)}}"> {{$customer->total_posts}}</a></td>
       </tr>
+    </table>
+    <hr>
+    <table>
+      <tr>
+        <th>Message Id</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Message</th>
+        <th>Message Date</th>
+      </tr>
+      @foreach($message as $m)
+      <tr>
+        <td>{{$m->message_id}}</td>
+        <td>{{$m->from}}</td>
+        <td><a href="{{route('adminHome.customerDetail', $m->to)}}">{{$m->to}}</a></td>
+        <td>{{$m->msg}}</td>
+        <td>{{$m->msg_date}}</td>
+      </tr>
+      @endforeach
     </table>
   </body>
 </html>

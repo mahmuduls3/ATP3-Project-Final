@@ -45,4 +45,6 @@ Route::group(['middleware'=>['sessionVerify']], function(){
   Route::get('/adminDeny/{property_id}', 'AdminHomeController@deny')->name('adminHome.deny');
   Route::get('/adminPropertyDetail/{property_id}', 'AdminHomeController@propertyDetail')->name('adminHome.propertyDetail');
   Route::get('/adminPendingPropertyDetail/{property_id}', 'AdminHomeController@pendingPropertyDetail')->name('adminHome.pendingPropertyDetail');
+  Route::get('/adminAllMessage', 'AdminHomeController@allMessage')->name('adminHome.allMessage');
+  Route::post('/adminAllMessage', 'AdminHomeController@searchMessage')->name('adminHome.searchMessage');
 });

@@ -9,6 +9,7 @@
     <a href="{{route('adminHome.index')}}">Home</a><br>
     <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
     <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
+    <a href="{{route('adminHome.allMessage')}}">All Message</a><br>
     <a href="{{ URL::previous() }}">Back</a><br>
     <a href="{{route('adminLogout.index')}}">Logout</a>
     <br>
