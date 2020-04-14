@@ -15,7 +15,10 @@ class TypeCheck
      */
     public function handle($request, Closure $next)
     {
-        
+      if ($request->session()->get('type') == 'admin') {
         return $next($request);
+      } else{
+        return redirect('/adminLogin');
+      }
     }
 }

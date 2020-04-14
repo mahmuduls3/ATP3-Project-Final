@@ -17,10 +17,10 @@
     <form method="post">
       {{csrf_field()}}
       <h3>Search Customer</h3>
-      <input type="text" name="username" value="" placeholder="Username">
-      <input type="text" name="name" value="" placeholder="Name">
-      <input type="number" name="phone" value="" placeholder="Phone">
-      <input type="text" name="email" value="" placeholder="Email">
+      <input type="text" name="username" value="{{old('username')}}" placeholder="Username">
+      <input type="text" name="name" value="{{old('name')}}" placeholder="Name">
+      <input type="number" name="phone" value="{{old('phone')}}" placeholder="Phone">
+      <input type="text" name="email" value="{{old('email')}}" placeholder="Email">
       <select class="" name="type">
         <option value="">Type</option>
         <option value="admin">Admin</option>

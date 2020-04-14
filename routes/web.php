@@ -28,7 +28,7 @@ Route::get('/adminMainPropertyDetail/{property_id}', 'AdminMainController@proper
 Route::get('/adminRegister', 'AdminRegisterController@index')->name('adminRegister.index');
 Route::post('/adminRegister', 'AdminRegisterController@verify');
 
-Route::group(['middleware'=>['sessionVerify']], function(){
+Route::group(['middleware'=>['sessionVerify', 'typeCheck']], function(){
   Route::get('/adminHome', 'AdminHomeController@index')->name('adminHome.index');
   Route::get('/adminAllCustomer', 'AdminHomeController@allCustomer')->name('adminHome.allCustomer');
   Route::post('/adminAllCustomer', 'AdminHomeController@searchCustomer');
@@ -47,4 +47,8 @@ Route::group(['middleware'=>['sessionVerify']], function(){
   Route::get('/adminPendingPropertyDetail/{property_id}', 'AdminHomeController@pendingPropertyDetail')->name('adminHome.pendingPropertyDetail');
   Route::get('/adminAllMessage', 'AdminHomeController@allMessage')->name('adminHome.allMessage');
   Route::post('/adminAllMessage', 'AdminHomeController@searchMessage')->name('adminHome.searchMessage');
+  Route::get('/adminAddUserIndex', 'AdminHomeController@addUserIndex')->name('adminHome.addUserIndex');
+  Route::post('/adminAddUserIndex', 'AdminHomeController@addUser')->name('adminHome.addUser');
+  Route::get('/adminEditUserIndex/{username}', 'AdminHomeController@editUserIndex')->name('adminHome.editUserIndex');
+  Route::post('/adminEditUserIndex/{username}', 'AdminHomeController@editUser')->name('adminHome.editUser');
 });

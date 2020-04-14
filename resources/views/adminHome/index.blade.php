@@ -8,6 +8,7 @@
   <body>
     <h1>Welcome to Home Page, {{session('username')}}</h1><br><hr>
     <a href="{{route('adminHome.index')}}">Home</a><br>
+    <a href="{{route('adminHome.addUserIndex')}}">Add User</a><br>
     <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
     <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
     <a href="{{route('adminHome.allMessage')}}">All Message</a><br>

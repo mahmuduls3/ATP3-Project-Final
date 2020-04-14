@@ -16,12 +16,9 @@ class AdminLoginController extends Controller
                  ->where('password', $req->password)
                  ->get();
       if($user){
-        if ($user[0]->type == 'admin') {
-          $req->session()->put('username', $req->username);
-          return redirect('/adminHome');
-        } else {
-          echo "User is not admin type";
-        }
+        $req->session()->put(['username' => $req->username, 'type' => $user[0]->type]);
+        //$req->session()->put('user', ['username' => $req->username, 'type' => $user[0]->type]);
+        return redirect('/adminHome');
       }else {
         $req->session()->flash('message', 'Invalid username or password');
         return redirect('/adminLogin');

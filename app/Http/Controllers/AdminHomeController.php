@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class AdminHomeController extends Controller
 {
@@ -45,10 +46,9 @@ class AdminHomeController extends Controller
         if ($message!=null) {
           return view('adminHome.customerDetail',['customer'=> $customer, 'message'=> $message]);
         }
-
-        }else {
-         return redirect('/adminHome');
-        }
+      }else {
+       return redirect('/adminHome');
+      }
     }
 
     public function searchCustomer(Request $req){
@@ -111,6 +111,7 @@ class AdminHomeController extends Controller
         }
       }
       $customer = $query->get();
+      //$req->flash();
       return view('adminHome.allCustomer', ['customer'=> $customer]);
     }
 
@@ -356,5 +357,82 @@ class AdminHomeController extends Controller
       }
       $message = $query->get();
       return view('adminHome.allMessage', ['message'=> $message]);
+    }
+
+    public function addUserIndex(){
+      return view('adminHome.addUserIndex');
+    }
+
+    public function addUser(Request $req){
+      $user = DB::table('customer')
+                 ->where('username', $req->username)
+                 ->get();
+      if($user!=null){
+        return redirect('/adminHomeAddUser');
+      }else {
+        $username = $req->username;
+        $password = $req->password;
+        $confirmPassword = $req->confirmPassword;
+        $type = $req->type;
+        $email = $req->email;
+        $phone = $req->phone;
+        if ($password != $confirmPassword) {
+          return redirect('/adminAddUser');
+        } else {
+          if (!$type) {
+            return redirect('/adminAddUser');
+          } else {
+            $customer = DB::table('customer')
+                          ->insert([
+                            'username'=>$username,
+                            'password'=>$password,
+                            'type'=>$type,
+                            'email'=>$email,
+                            'phone'=>$phone,
+                            'c_image'=>$username,
+                            'active_posts'=>0,
+                            'pending_posts'=>0,
+                            'sold_posts'=>0,
+                            'total_posts'=>0
+                          ]);
+            if ($customer!=null) {
+              return redirect('/adminAddUser');
+              $req->session()->flash('message', 'Registration confirmed');
+            }else {
+              echo "Registration not confirmed";
+            }
+          }
+        }
+      }
+    }
+
+    public function editUserIndex($username){
+      $customer = DB::table('customer')
+                     ->select('customer_id', 'username', 'name', 'type', 'email', 'phone')
+                     ->where('username', $username)
+                     ->get()->first();
+      if ($customer) {
+        return view('adminHome.editUserIndex', ['customer'=>$customer]);
+      }
+    }
+
+    public function editUser($username, Request $req){
+      $type = $req->type;
+      $name = $req->name;
+      $email = $req->email;
+      $phone = $req->phone;
+      $update = [
+                  'type'=>$type,
+                  'name'=>$name,
+                  'email'=> $email,
+                  'phone'=>$phone
+                ];
+      $customer = DB::table('customer')
+                    ->where('username', $username)
+                    ->update($update);
+                    //->update(['type'=>$type, 'name'=>$name, 'email'=> $email, 'phone'=>$phone]);
+      if ($customer) {
+        customerDetail($username);
+      }
     }
 }

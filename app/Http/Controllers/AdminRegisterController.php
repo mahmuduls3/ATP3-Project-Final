@@ -19,28 +19,32 @@ class AdminRegisterController extends Controller
       }else {
         $username = $req->username;
         $password = $req->password;
+        $confirmPassword = $req->confirmPassword;
         $email = $req->email;
         $phone = $req->phone;
-        $customer = DB::table('customer')
-                      ->insert([
-                        'username'=>$username,
-                        'password'=>$password,
-                        'type'=>'customer',
-                        'email'=>$email,
-                        'phone'=>$phone,
-                        'c_image'=>$username,
-                        'active_posts'=>0,
-                        'pending_posts'=>0,
-                        'sold_posts'=>0,
-                        'total_posts'=>0
-                      ]);
-        if ($customer!=null) {
+        if ($password != $confirmPassword) {
           return redirect('/adminRegister');
-          $req->session()->flash('message', 'Registration confirmed');
-        }else {
-          echo "Registration not confirmed";
+        } else {
+          $customer = DB::table('customer')
+                        ->insert([
+                          'username'=>$username,
+                          'password'=>$password,
+                          'type'=>'customer',
+                          'email'=>$email,
+                          'phone'=>$phone,
+                          'c_image'=>$username,
+                          'active_posts'=>0,
+                          'pending_posts'=>0,
+                          'sold_posts'=>0,
+                          'total_posts'=>0
+                        ]);
+          if ($customer!=null) {
+            return redirect('/adminRegister');
+            $req->session()->flash('message', 'Registration confirmed');
+          }else {
+            echo "Registration not confirmed";
+          }
         }
-
       }
     }
 }
