@@ -364,51 +364,70 @@ class AdminHomeController extends Controller
     }
 
     public function addUser(Request $req){
-      $user = DB::table('customer')
-                 ->where('username', $req->username)
-                 ->get();
-      if($user!=null){
-        return redirect('/adminHomeAddUser');
-      }else {
-        $username = $req->username;
-        $password = $req->password;
-        $confirmPassword = $req->confirmPassword;
-        $type = $req->type;
-        $email = $req->email;
-        $phone = $req->phone;
-        if ($password != $confirmPassword) {
-          return redirect('/adminAddUser');
+        $validation = Validator::make($req->all(), [
+          'username'=>'bail|required|unique:customer',
+          'password'=>'required|min:4',
+          'confirmPassword'=>'required|same:password',
+          'type'=>'required',
+          'email'=>'required',
+          'phone'=>'required',
+          'pic'=>'required|image'
+        ]);
+        if ($validation->fails()) {
+          return redirect()->route('adminHome.addUserIndex')
+                           ->with('errors', $validation->errors())
+                           ->withInput();
         } else {
-          if (!$type) {
-            return redirect('/adminAddUser');
-          } else {
-            $customer = DB::table('customer')
-                          ->insert([
-                            'username'=>$username,
-                            'password'=>$password,
-                            'type'=>$type,
-                            'email'=>$email,
-                            'phone'=>$phone,
-                            'c_image'=>$username,
-                            'active_posts'=>0,
-                            'pending_posts'=>0,
-                            'sold_posts'=>0,
-                            'total_posts'=>0
-                          ]);
-            if ($customer!=null) {
-              return redirect('/adminAddUser');
-              $req->session()->flash('message', 'Registration confirmed');
-            }else {
-              echo "Registration not confirmed";
+          $username = $req->username;
+          $password = $req->password;
+          $confirmPassword = $req->confirmPassword;
+          $type = $req->type;
+          $email = $req->email;
+          $phone = $req->phone;
+          $pic = $req->pic;
+          if ($req->hasfile('pic')) {
+            $file = $req->file('pic');
+            //echo "File name: ".$file->getClientOriginalName()."<br>";
+            //echo "File Extension: ".$file->getClientOriginalExtension()."<br>";
+            //echo "File Size: ".$file->getSize()."<br>";
+            //echo "File Mime Type: ".$file->getMimeType()."<br>";
+
+            if ($file->move('users', $username . '.' . $file->getClientOriginalExtension())) {
+              $customer = DB::table('customer')
+                            ->insert([
+                              'username'=>$username,
+                              'password'=>$password,
+                              'type'=>$type,
+                              'email'=>$email,
+                              'phone'=>$phone,
+                              'c_image'=>$username . '.' . $file->getClientOriginalExtension(),
+                              'active_posts'=>0,
+                              'pending_posts'=>0,
+                              'sold_posts'=>0,
+                              'total_posts'=>0
+                            ]);
+              if ($customer!=null) {
+                return redirect('/adminAddUser');
+                $req->session()->flash('message', 'Adding user confirmed');
+              }else {
+                $req->session()->flash('message', 'Adding user not confirmed');
+                return redirect()->route('adminHome.addUserIndex');
+              }
+            } else {
+              $req->session()->flash('message', 'File moved not successful');
+              return redirect()->route('adminHome.addUserIndex');
             }
+          } else {
+            $req->session()->flash('message', 'No picture found');
+            return redirect()->route('adminHome.addUserIndex');
           }
         }
-      }
+
     }
 
     public function editUserIndex($username){
       $customer = DB::table('customer')
-                     ->select('customer_id', 'username', 'name', 'type', 'email', 'phone')
+                     ->select('customer_id', 'c_image', 'username', 'name', 'type', 'email', 'phone')
                      ->where('username', $username)
                      ->get()->first();
       if ($customer) {
@@ -432,7 +451,9 @@ class AdminHomeController extends Controller
                     ->update($update);
                     //->update(['type'=>$type, 'name'=>$name, 'email'=> $email, 'phone'=>$phone]);
       if ($customer) {
-        customerDetail($username);
+        return redirect()->route('adminHome.customerDetail', $username);
+      } else {
+        return redirect()->route('adminHome.index');
       }
     }
 }

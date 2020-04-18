@@ -17,7 +17,7 @@
     <table>
       <tr>
         <td>Customer Image</td>
-        <td>{{$customer->c_image}}</td>
+        <td><img src="/users/{{$customer->c_image}}" alt="" width="150"> </td>
       </tr>
       <tr>
         <td>Customer Id:</td>

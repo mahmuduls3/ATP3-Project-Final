@@ -18,6 +18,10 @@
       {{csrf_field()}}
       <table>
         <tr>
+          <td>User Image</td>
+          <td><img src="/users/{{$customer->c_image}}" alt="" width="150"></td>
+        </tr>
+        <tr>
           <td>User Id</td>
           <td><input type="text" name="customer_id" value="{{$customer->customer_id}}" readonly></td>
         </tr>

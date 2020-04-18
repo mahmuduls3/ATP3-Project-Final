@@ -58,7 +58,7 @@
       @foreach($customer as $c)
       <tr>
         <td>{{$c->customer_id}}</td>
-        <td>{{$c->c_image}}</td>
+        <td><img src="/users/{{$c->c_image}}" alt="" width="150"></td>
         <td> <a href="{{route('adminHome.customerDetail', $c->username)}}">{{$c->username}}</a> </td>
         <td>{{$c->name}}</td>
         <td>{{$c->type}}</td>
