@@ -459,4 +459,80 @@ class AdminHomeController extends Controller
         return redirect()->route('adminHome.index');
       }
     }
+
+    public function feedbackIndex(){
+      $message = DB::table('message')
+                    ->select('message_id', 'from', 'to', 'msg', 'msg_date')
+                    ->where('to', 'admin')
+                    ->get();
+      if ($message!=null) {
+        return view('adminHome.feedback', ['message'=>$message]);
+      }
+    }
+
+    public function feedback(Request $req){
+      $from = $req->from;
+      $msg = $req->msg;
+      $orderby = $req->orderby;
+      $query = DB::table('message')->select('message_id', 'from', 'to', 'msg', 'msg_date')
+                                   ->where('to', 'admin');
+      if($from){
+        $query->where(function ($q) use ($from){
+          $q->where('from', 'like', "%$from%");
+        });
+      }
+      if($msg){
+        $query->where(function ($q) use ($msg){
+          $q->where('msg', 'like', "%$msg%");
+        });
+      }
+      if ($orderby) {
+        if ($orderby == "most_recent") {
+          $query->orderBy('message_id', 'desc');
+        }
+        if ($orderby == "most_previous") {
+          $query->orderBy('message_id', 'asc');
+        }
+      }
+      $message = $query->get();
+      session()->flashInput($req->input());
+      return view('adminHome.feedback', ['message'=> $message]);
+    }
+
+    public function toFeatured($id){
+      $p = DB::table('property')
+                     ->where('property_id', $id)
+                     ->update(['status'=>'featured']);
+      if ($p!=null) {
+        $property = DB::table('property')
+                       ->where('property_id', $id)
+                       ->get()->first();
+        if ($property!=null) {
+          return view('adminHome.propertyDetail', ['property'=>$property]);
+        }else {
+          return redirect('/adminHome');
+        }
+      }else {
+        return redirect('/adminHome');
+      }
+    }
+
+    public function toAllowed($id){
+      $p = DB::table('property')
+                     ->where('property_id', $id)
+                     ->update(['status'=>'allowed']);
+      if ($p!=null) {
+        $property = DB::table('property')
+                       ->where('property_id', $id)
+                       ->get()->first();
+        if ($property!=null) {
+          return view('adminHome.propertyDetail', ['property'=>$property]);
+        }else {
+          return redirect('/adminHome');
+        }
+      }else {
+        return redirect('/adminHome');
+      }
+    }
+
 }

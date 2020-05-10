@@ -10,6 +10,7 @@
     <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
     <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
     <a href="{{route('adminHome.allMessage')}}">All Message</a><br>
+    <a href="{{route('adminHome.feedback')}}">Customer Feedback</a><br>
     <a href="{{ URL::previous() }}">Back</a><br>
     <a href="{{route('adminLogout.index')}}">Logout</a>
     <br>
@@ -73,6 +74,14 @@
       <tr>
         <td>Posted By:</td>
         <td> <a href="{{route('adminHome.customerDetail', $property->username)}}">{{$property->username}}</a> </td>
+      </tr>
+      <tr>
+        <td>Make it:</td>
+        @if($property->status =='allowed')
+          <td><a href="{{route('adminHome.toFeatured', $property->property_id)}}">Featured<a></td>
+        @else
+          <td> <a href="{{route('adminHome.toAllowed', $property->property_id)}}">Allowed</a> </td>
+        @endif
       </tr>
     </table>
   </body>

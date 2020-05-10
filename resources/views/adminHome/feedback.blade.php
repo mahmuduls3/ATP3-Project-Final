@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>All Message</title>
+    <title>Customer Feedback</title>
   </head>
   <body>
-    <h1>All Messages List</h1><br><hr>
+    <h1>Customer Feedback</h1><br><hr>
     <a href="{{route('adminHome.index')}}">Home</a><br>
     <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
     <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
@@ -17,9 +17,8 @@
     <br>
     <form method="post">
       {{csrf_field()}}
-      <h3>Search Message</h3>
+      <h3>Search Feedback</h3>
       <input type="text" name="from" value="{{old('from')}}" placeholder="Messages From">
-      <input type="text" name="to" value="{{old('to')}}" placeholder="Messages To">
       <input type="text" name="msg" value="{{old('msg')}}" placeholder="Messages">
       <select class="" name="orderby">
         <option  @if (old('orderby') == 'most_recent') selected @endif value="most_recent">Most Recent</option>
