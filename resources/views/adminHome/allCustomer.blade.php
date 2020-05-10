@@ -23,20 +23,20 @@
       <input type="text" name="email" value="{{old('email')}}" placeholder="Email">
       <select class="" name="type">
         <option value="">Type</option>
-        <option value="admin">Admin</option>
-        <option value="moderator">Moderator</option>
-        <option value="employee">Employee</option>
-        <option value="customer">Customer</option>
+        <option @if (old('type') == 'admin') selected @endif value="admin">Admin</option>
+        <option @if (old('type') == 'moderator') selected @endif value="moderator">Moderator</option>
+        <option @if (old('type') == 'employee') selected @endif value="employee">Employee</option>
+        <option @if (old('type') == 'customer') selected @endif value="customer">Customer</option>
       </select>
       <select class="" name="orderby">
-        <option value="active_posts_l_h">Active Posts Low To High</option>
-        <option value="active_posts_h_l">Active Posts High To Low</option>
-        <option value="pending_posts_l_h">Pending Posts Low To High</option>
-        <option value="pending_posts_h_l">Pending Posts High To Low</option>
-        <option value="sold_posts_l_h">Sold Posts Low To High</option>
-        <option value="sold_posts_h_l">Sold Posts High To Low</option>
-        <option value="total_posts_l_h">Total Posts Low To High</option>
-        <option value="total_posts_h_l">Total Posts High To Low</option>
+        <option @if (old('orderby') == 'active_posts_l_h') selected @endif value="active_posts_l_h">Active Posts Low To High</option>
+        <option @if (old('orderby') == 'active_posts_h_l') selected @endif value="active_posts_h_l">Active Posts High To Low</option>
+        <option @if (old('orderby') == 'pending_posts_l_h') selected @endif value="pending_posts_l_h">Pending Posts Low To High</option>
+        <option @if (old('orderby') == 'pending_posts_h_l') selected @endif value="pending_posts_h_l">Pending Posts High To Low</option>
+        <option @if (old('orderby') == 'sold_posts_l_h') selected @endif value="sold_posts_l_h">Sold Posts Low To High</option>
+        <option @if (old('orderby') == 'sold_posts_h_l') selected @endif value="sold_posts_h_l">Sold Posts High To Low</option>
+        <option @if (old('orderby') == 'total_posts_l_h') selected @endif value="total_posts_l_h">Total Posts Low To High</option>
+        <option @if (old('orderby') == 'total_posts_h_l') selected @endif value="total_posts_h_l">Total Posts High To Low</option>
       </select>
       <input type="submit" name="search" value="Search">
     </form>

@@ -17,77 +17,77 @@
     <form method="post">
       {{csrf_field()}}
       <h3>Search Property</h3>
-      <input type="text" name="title" value="" placeholder="Title">
-      <input type="text" name="location" value="" placeholder="Location">
+      <input type="text" name="title" value="{{old('title')}}" placeholder="Title">
+      <input type="text" name="location" value="{{old('location')}}" placeholder="Location">
       <select name="type">
         <option value="">Type</option>
-        <option value="apartment">Apartment</option>
-        <option value="flat">Flat</option>
-        <option value="house">House</option>
-        <option value="room">Room</option>
-        <option value="shop">Shop</option>
+        <option @if (old('type') == 'apartment') selected @endif value="apartment">Apartment</option>
+        <option @if (old('type') == 'flat') selected @endif value="flat">Flat</option>
+        <option @if (old('type') == 'house') selected @endif value="house">House</option>
+        <option @if (old('type') == 'room') selected @endif value="room">Room</option>
+        <option @if (old('type') == 'shop') selected @endif value="shop">Shop</option>
       </select>
       <select name="purpose">
         <option value="">Purpose</option>
-        <option value="rent">Rent</option>
-        <option value="sell">Sell</option>
+        <option @if (old('purpose') == 'rent') selected @endif value="rent">Rent</option>
+        <option @if (old('purpose') == 'sell') selected @endif value="sell">Sell</option>
       </select>
       <select name="status">
         <option value="">Status</option>
-        <option value="allowed">Allowed</option>
-        <option value="sold">Sold</option>
-        <option value="pending">Pending</option>
-        <option value="featured">Featured</option>
-        <option value="denied">Denied</option>
+        <option @if (old('status') == 'allowed') selected @endif value="allowed">Allowed</option>
+        <option @if (old('status') == 'sold') selected @endif value="sold">Sold</option>
+        <option @if (old('status') == 'pending') selected @endif value="pending">Pending</option>
+        <option @if (old('status') == 'featured') selected @endif value="featured">Featured</option>
+        <option @if (old('status') == 'denied') selected @endif value="denied">Denied</option>
       </select>
       <select name="bed">
         <option value="">Bed</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
+        <option @if (old('bed') == '1') selected @endif value="1">1</option>
+        <option @if (old('bed') == '2') selected @endif value="2">2</option>
+        <option @if (old('bed') == '3') selected @endif value="3">3</option>
+        <option @if (old('bed') == '4') selected @endif value="4">4</option>
+        <option @if (old('bed') == '5') selected @endif value="5">5</option>
+        <option @if (old('bed') == '6') selected @endif value="6">6</option>
       </select>
       <select name="bath">
         <option value="">Bath</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
+        <option @if (old('bath') == '1') selected @endif value="1">1</option>
+        <option @if (old('bath') == '2') selected @endif value="2">2</option>
+        <option @if (old('bath') == '3') selected @endif value="3">3</option>
+        <option @if (old('bath') == '4') selected @endif value="4">4</option>
+        <option @if (old('bath') == '5') selected @endif value="5">5</option>
+        <option @if (old('bath') == '6') selected @endif value="6">6</option>
       </select>
       <select name="floor">
         <option value="">Floor</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
+        <option @if (old('floor') == '1') selected @endif value="1">1</option>
+        <option @if (old('floor') == '2') selected @endif value="2">2</option>
+        <option @if (old('floor') == '3') selected @endif value="3">3</option>
+        <option @if (old('floor') == '4') selected @endif value="4">4</option>
+        <option @if (old('floor') == '5') selected @endif value="5">5</option>
+        <option @if (old('floor') == '6') selected @endif value="6">6</option>
+        <option @if (old('floor') == '7') selected @endif value="7">7</option>
+        <option @if (old('floor') == '8') selected @endif value="8">8</option>
+        <option @if (old('floor') == '9') selected @endif value="9">9</option>
+        <option @if (old('floor') == '10') selected @endif value="10">10</option>
+        <option @if (old('floor') == '11') selected @endif value="11">11</option>
+        <option @if (old('floor') == '12') selected @endif value="12">12</option>
+        <option @if (old('floor') == '13') selected @endif value="13">13</option>
+        <option @if (old('floor') == '14') selected @endif value="14">14</option>
+        <option @if (old('floor') == '15') selected @endif value="15">15</option>
       </select>
-      <input type="number" name="sq_ft_from" value="" placeholder="Sq Ft From">
-      <input type="number" name="sq_ft_to" value="" placeholder="Sq Ft To">
-      <input type="number" name="price_from" value="" placeholder="Price From">
-      <input type="number" name="price_to" value="" placeholder="Price To">
+      <input type="number" name="sq_ft_from" value="{{old('sq_ft_from')}}" placeholder="Sq Ft From">
+      <input type="number" name="sq_ft_to" value="{{old('sq_ft_to')}}" placeholder="Sq Ft To">
+      <input type="number" name="price_from" value="{{old('price_from')}}" placeholder="Price From">
+      <input type="number" name="price_to" value="{{old('price_to')}}" placeholder="Price To">
       <select name="orderby">
         <option value="">Order By</option>
-        <option value="most_recent">Most recent</option>
-        <option value="most_previous">Most previous</option>
-        <option value="price_h_l">Price high to low</option>
-        <option value="price_l_h">Price low to high</option>
-        <option value="feet_h_l">Sq ft high to low</option>
-        <option value="feet_l_h">Sq ft low to high</option>
+        <option @if (old('orderby') == 'most_recent') selected @endif value="most_recent">Most recent</option>
+        <option @if (old('orderby') == 'most_previous') selected @endif value="most_previous">Most previous</option>
+        <option @if (old('orderby') == 'price_h_l') selected @endif value="price_h_l">Price high to low</option>
+        <option @if (old('orderby') == 'price_l_h') selected @endif value="price_l_h">Price low to high</option>
+        <option @if (old('orderby') == 'feet_h_l') selected @endif value="feet_h_l">Sq ft high to low</option>
+        <option @if (old('orderby') == 'feet_l_h') selected @endif value="feet_l_h">Sq ft low to high</option>
       </select>
       <input type="submit" name="search" value="Search">
     </form>

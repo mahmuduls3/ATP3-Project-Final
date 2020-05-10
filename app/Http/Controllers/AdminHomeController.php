@@ -111,6 +111,7 @@ class AdminHomeController extends Controller
         }
       }
       $customer = $query->get();
+      session()->flashInput($req->input());
       //$req->flash();
       return view('adminHome.allCustomer', ['customer'=> $customer]);
     }
@@ -314,6 +315,7 @@ class AdminHomeController extends Controller
       $query->orderBy('property_id', 'asc');
 
       $property = $query->get();
+      session()->flashInput($req->input());
       return view('adminHome.allProperty', ['property'=> $property]);
     }
 
@@ -356,6 +358,7 @@ class AdminHomeController extends Controller
         }
       }
       $message = $query->get();
+      session()->flashInput($req->input());
       return view('adminHome.allMessage', ['message'=> $message]);
     }
 

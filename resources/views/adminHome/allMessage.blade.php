@@ -17,12 +17,12 @@
     <form method="post">
       {{csrf_field()}}
       <h3>Search Message</h3>
-      <input type="text" name="from" value="" placeholder="Messages From">
-      <input type="text" name="to" value="" placeholder="Messages To">
-      <input type="text" name="msg" value="" placeholder="Messages">
+      <input type="text" name="from" value="{{old('from')}}" placeholder="Messages From">
+      <input type="text" name="to" value="{{old('to')}}" placeholder="Messages To">
+      <input type="text" name="msg" value="{{old('msg')}}" placeholder="Messages">
       <select class="" name="orderby">
-        <option value="most_recent">Most Recent</option>
-        <option value="most_previous">Most Previous</option>
+        <option  @if (old('orderby') == 'most_recent') selected @endif value="most_recent">Most Recent</option>
+        <option  @if (old('orderby') == 'most_previous') selected @endif value="most_previous">Most Previous</option>
       </select>
       <input type="submit" name="search" value="Search">
     </form>
