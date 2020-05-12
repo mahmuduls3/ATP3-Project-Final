@@ -316,7 +316,8 @@ class AdminHomeController extends Controller
 
       $property = $query->get();
       session()->flashInput($req->input());
-      return view('adminHome.allProperty', ['property'=> $property]);
+      //return view('adminHome.allProperty', ['property'=> $property]);
+
     }
 
     public function allMessage(){

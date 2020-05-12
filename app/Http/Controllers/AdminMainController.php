@@ -11,7 +11,8 @@ class AdminMainController extends Controller
                     ->where('status', 'featured')
                     ->get();
       if ($property!=null) {
-        return view('adminMain.index', ['property'=>$property]);
+        //return view('adminMain.index', ['property'=>$property]);
+        return view('adminWebsite.index', ['property'=>$property]);
       }else {
         echo "error viewing main page";
       }

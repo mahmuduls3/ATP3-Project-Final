@@ -16,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/index', 'AdminWebsiteController@index')->name('adminWebsite.index');
+Route::get('/about-us', 'AdminWebsiteController@aboutUs')->name('adminWebsite.about-us');
+Route::get('/blog', 'AdminWebsiteController@blog')->name('adminWebsite.blog');
+Route::get('/contact', 'AdminWebsiteController@contact')->name('adminWebsite.contact');
+Route::get('/elements', 'AdminWebsiteController@elements')->name('adminWebsite.elements');
+Route::get('/listings', 'AdminWebsiteController@listings')->name('adminWebsite.listings');
+Route::post('/listings', 'AdminWebsiteController@searchListings')->name('adminWebsite.searchListings');
+Route::get('/single-blog', 'AdminWebsiteController@singleBlog')->name('adminWebsite.single-blog');
+Route::get('/single-listings', 'AdminWebsiteController@singleListings')->name('adminWebsite.single-listings');
+
 Route::get('/adminLogin', 'AdminLoginController@index')->name('adminLogin.index');
 Route::post('/adminLogin', 'AdminLoginController@verify');
 
