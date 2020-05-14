@@ -17,15 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index', 'AdminWebsiteController@index')->name('adminWebsite.index');
-Route::get('/about-us', 'AdminWebsiteController@aboutUs')->name('adminWebsite.about-us');
-Route::get('/blog', 'AdminWebsiteController@blog')->name('adminWebsite.blog');
-Route::get('/contact', 'AdminWebsiteController@contact')->name('adminWebsite.contact');
-Route::get('/elements', 'AdminWebsiteController@elements')->name('adminWebsite.elements');
-Route::get('/listings', 'AdminWebsiteController@listings')->name('adminWebsite.listings');
-Route::post('/listings', 'AdminWebsiteController@searchListings')->name('adminWebsite.searchListings');
-Route::get('/single-blog', 'AdminWebsiteController@singleBlog')->name('adminWebsite.single-blog');
-Route::get('/single-listings', 'AdminWebsiteController@singleListings')->name('adminWebsite.single-listings');
+Route::get('/adminIndex', 'AdminWebsiteController@index')->name('adminWebsite.index');
+Route::get('/adminAbout-us', 'AdminWebsiteController@aboutUs')->name('adminWebsite.about-us');
+Route::get('/adminBlog', 'AdminWebsiteController@blog')->name('adminWebsite.blog');
+Route::get('/adminContact', 'AdminWebsiteController@contact')->name('adminWebsite.contact');
+Route::get('/AdminElements', 'AdminWebsiteController@elements')->name('adminWebsite.elements');
+Route::get('/AdminListings', 'AdminWebsiteController@listings')->name('adminWebsite.listings');
+Route::post('/AdminListings', 'AdminWebsiteController@searchListings')->name('adminWebsite.searchListings');
+Route::get('/adminSingle-blog', 'AdminWebsiteController@singleBlog')->name('adminWebsite.singleBlog');
+Route::get('/adminSingle-listings/{property_id}', 'AdminWebsiteController@singleListings')->name('adminWebsite.singleListings');
 
 Route::get('/adminLogin', 'AdminLoginController@index')->name('adminLogin.index');
 Route::post('/adminLogin', 'AdminLoginController@verify');

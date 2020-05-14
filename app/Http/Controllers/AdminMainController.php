@@ -12,7 +12,7 @@ class AdminMainController extends Controller
                     ->get();
       if ($property!=null) {
         //return view('adminMain.index', ['property'=>$property]);
-        return view('adminWebsite.index', ['property'=>$property]);
+        return view('adminMain.index', ['property'=>$property]);
       }else {
         echo "error viewing main page";
       }

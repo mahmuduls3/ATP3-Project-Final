@@ -1,4 +1,4 @@
-@extends('layout/main')
+@extends('layout/main_id')
 
   @section('single-listings')
     <!-- ##### Breadcumb Area Start ##### -->
@@ -26,206 +26,151 @@
                             <p>Search for your home</p>
                         </div>
                         <!-- Search Form -->
-                        <form action="#" method="post" id="advanceSearch">
+                        <form action="{{route('adminWebsite.searchListings')}}" method="post" id="advanceSearch">
                             <div class="row">
-
+                              {{csrf_field()}}
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
-                                        <input type="input" class="form-control" name="input" placeholder="Keyword">
+                                        <input type="input" class="form-control" value="{{old('title')}}" name="title" placeholder="Title">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-4 col-lg-3">
                                     <div class="form-group">
-                                        <select class="form-control" id="cities">
-                                            <option>All Cities</option>
-                                            <option>Riga</option>
-                                            <option>Melbourne</option>
-                                            <option>Vienna</option>
-                                            <option>Vancouver</option>
-                                            <option>Toronto</option>
-                                            <option>Calgary</option>
-                                            <option>Adelaide</option>
-                                            <option>Perth</option>
-                                            <option>Auckland</option>
-                                            <option>Helsinki</option>
+                                        <input type="input" class="form-control" value="{{old('location')}}" name="location" placeholder="Location">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group">
+                                        <select class="form-control" id="catagories" name="type">
+                                          <option value="">Type</option>
+                                          <option @if (old('type') == 'apartment') selected @endif value="apartment">Apartment</option>
+                                          <option @if (old('type') == 'flat') selected @endif value="flat">Flat</option>
+                                          <option @if (old('type') == 'house') selected @endif value="house">House</option>
+                                          <option @if (old('type') == 'room') selected @endif value="room">Room</option>
+                                          <option @if (old('type') == 'shop') selected @endif value="shop">Shop</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-4 col-lg-3">
+                                <div class="col-12 col-md-4 col-lg-2">
                                     <div class="form-group">
-                                        <select class="form-control" id="catagories">
-                                            <option>All Catagories</option>
-                                            <option>Apartment</option>
-                                            <option>Bar</option>
-                                            <option>Farm</option>
-                                            <option>House</option>
-                                            <option>Store</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <select class="form-control" id="offers">
-                                            <option>All Offers</option>
-                                            <option>100% OFF</option>
-                                            <option>75% OFF</option>
-                                            <option>50% OFF</option>
-                                            <option>25% OFF</option>
-                                            <option>10% OFF</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 col-xl-3">
-                                    <div class="form-group">
-                                        <select class="form-control" id="listings">
-                                            <option>All Listings</option>
-                                            <option>Listings 1</option>
-                                            <option>Listings 2</option>
-                                            <option>Listings 3</option>
-                                            <option>Listings 4</option>
-                                            <option>Listings 5</option>
+                                        <select name="purpose" class="form-control" id="offers">
+                                          <option value="">Purpose</option>
+                                          <option @if (old('purpose') == 'rent') selected @endif value="rent">Rent</option>
+                                          <option @if (old('purpose') == 'sell') selected @endif value="sell">Sell</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-4 col-xl-2">
                                     <div class="form-group">
-                                        <select class="form-control" id="bedrooms">
-                                            <option>Bedrooms</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5+</option>
+                                        <select name="status" class="form-control" id="listings">
+                                          <option value="">Status</option>
+                                          <option @if (old('status') == 'allowed') selected @endif value="allowed">Allowed</option>
+                                          <option @if (old('status') == 'sold') selected @endif value="sold">Sold</option>
+                                          <option @if (old('status') == 'pending') selected @endif value="pending">Pending</option>
+                                          <option @if (old('status') == 'featured') selected @endif value="featured">Featured</option>
+                                          <option @if (old('status') == 'denied') selected @endif value="denied">Denied</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group">
+                                        <select name="bed" class="form-control" id="bedrooms">
+                                          <option value="">Bed</option>
+                                          <option @if (old('bed') == '1') selected @endif value="1">1</option>
+                                          <option @if (old('bed') == '2') selected @endif value="2">2</option>
+                                          <option @if (old('bed') == '3') selected @endif value="3">3</option>
+                                          <option @if (old('bed') == '4') selected @endif value="4">4</option>
+                                          <option @if (old('bed') == '5') selected @endif value="5">5</option>
+                                          <option @if (old('bed') == '6') selected @endif value="6">6</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-4 col-xl-2">
                                     <div class="form-group">
-                                        <select class="form-control" id="bathrooms">
-                                            <option>Bathrooms</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5+</option>
+                                        <select name="bath" class="form-control" id="bathrooms">
+                                            <option value="">Bath</option>
+                                            <option @if (old('bath') == '1') selected @endif value="1">1</option>
+                                            <option @if (old('bath') == '2') selected @endif value="2">2</option>
+                                            <option @if (old('bath') == '3') selected @endif value="3">3</option>
+                                            <option @if (old('bath') == '4') selected @endif value="4">4</option>
+                                            <option @if (old('bath') == '5') selected @endif value="5">5</option>
+                                            <option @if (old('bath') == '6') selected @endif value="6">6</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-8 col-lg-12 col-xl-5 d-flex">
-                                    <!-- Space Range -->
-                                    <div class="slider-range">
-                                        <div data-min="120" data-max="820" data-unit=" sq. ft" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="120" data-value-max="820">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div class="range">120 sq. ft - 820 sq. ft</div>
-                                    </div>
-
-                                    <!-- Distance Range -->
-                                    <div class="slider-range">
-                                        <div data-min="10" data-max="1300" data-unit=" mil" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1300">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div class="range">10 mil - 1300 mil</div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 search-form-second-steps">
-                                    <div class="row">
-
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <div class="form-group">
-                                                <select class="form-control" id="types">
-                                                    <option>All Types</option>
-                                                    <option>Apartment <span>(30)</span></option>
-                                                    <option>Land <span>(69)</span></option>
-                                                    <option>Villas <span>(103)</span></option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <div class="form-group">
-                                                <select class="form-control" id="catagories2">
-                                                    <option>All Catagories</option>
-                                                    <option>Apartment</option>
-                                                    <option>Bar</option>
-                                                    <option>Farm</option>
-                                                    <option>House</option>
-                                                    <option>Store</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <div class="form-group">
-                                                <select class="form-control" id="Actions">
-                                                    <option>All Actions</option>
-                                                    <option>Sales</option>
-                                                    <option>Booking</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <div class="form-group">
-                                                <select class="form-control" id="city2">
-                                                    <option>All City</option>
-                                                    <option>City 1</option>
-                                                    <option>City 2</option>
-                                                    <option>City 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <select class="form-control" id="Actions3">
-                                                    <option>All Actions</option>
-                                                    <option>Sales</option>
-                                                    <option>Booking</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <select class="form-control" id="city3">
-                                                    <option>All City</option>
-                                                    <option>City 1</option>
-                                                    <option>City 2</option>
-                                                    <option>City 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <select class="form-control" id="city5">
-                                                    <option>All City</option>
-                                                    <option>City 1</option>
-                                                    <option>City 2</option>
-                                                    <option>City 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                <div class="col-12 col-md-4 col-xl-2">
+                                    <div class="form-group">
+                                      <select name="floor" class="form-control" id="bathrooms">
+                                        <option value="">Floor</option>
+                                        <option @if (old('floor') == '1') selected @endif value="1">1</option>
+                                        <option @if (old('floor') == '2') selected @endif value="2">2</option>
+                                        <option @if (old('floor') == '3') selected @endif value="3">3</option>
+                                        <option @if (old('floor') == '4') selected @endif value="4">4</option>
+                                        <option @if (old('floor') == '5') selected @endif value="5">5</option>
+                                        <option @if (old('floor') == '6') selected @endif value="6">6</option>
+                                        <option @if (old('floor') == '7') selected @endif value="7">7</option>
+                                        <option @if (old('floor') == '8') selected @endif value="8">8</option>
+                                        <option @if (old('floor') == '9') selected @endif value="9">9</option>
+                                        <option @if (old('floor') == '10') selected @endif value="10">10</option>
+                                        <option @if (old('floor') == '11') selected @endif value="11">11</option>
+                                        <option @if (old('floor') == '12') selected @endif value="12">12</option>
+                                        <option @if (old('floor') == '13') selected @endif value="13">13</option>
+                                        <option @if (old('floor') == '14') selected @endif value="14">14</option>
+                                        <option @if (old('floor') == '15') selected @endif value="15">15</option>
+                                      </select>
                                     </div>
                                 </div>
 
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="sq_ft_from" value="{{old('sq_ft_from')}}" placeholder="Sq Ft From">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="sq_ft_to" value="{{old('sq_ft_to')}}" placeholder="Sq Ft To">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="price_from" value="{{old('price_from')}}" placeholder="Price From">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="price_to" value="{{old('price_to')}}" placeholder="Price To">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-xl-2">
+                                    <div class="form-group">
+                                        <select name="orderby"  class="form-control" id="orderby">
+                                            <option value="">Order By</option>
+                                            <option @if (old('orderby') == 'most_recent') selected @endif value="most_recent">Most recent</option>
+                                            <option @if (old('orderby') == 'most_previous') selected @endif value="most_previous">Most previous</option>
+                                            <option @if (old('orderby') == 'price_h_l') selected @endif value="price_h_l">Price high to low</option>
+                                            <option @if (old('orderby') == 'price_l_h') selected @endif value="price_l_h">Price low to high</option>
+                                            <option @if (old('orderby') == 'feet_h_l') selected @endif value="feet_h_l">Sq ft high to low</option>
+                                            <option @if (old('orderby') == 'feet_l_h') selected @endif value="feet_l_h">Sq ft low to high</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Submit -->
                                 <div class="col-12 d-flex justify-content-between align-items-end">
                                     <!-- More Filter -->
                                     <div class="more-filter">
-                                        <a href="#" id="moreFilter">+ More filters</a>
+                                        <a href="#" id="moreFilter"></a>
                                     </div>
                                     <!-- Submit -->
                                     <div class="form-group mb-0">
@@ -249,9 +194,9 @@
                     <!-- Single Listings Slides -->
                     <div class="single-listings-sliders owl-carousel">
                         <!-- Single Slide -->
-                        <img src="img/bg-img/hero4.jpg" alt="">
+                        <img src="../img/bg-img/hero4.jpg" alt="">
                         <!-- Single Slide -->
-                        <img src="img/bg-img/hero5.jpg" alt="">
+                        <img src="../img/bg-img/hero5.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -261,77 +206,40 @@
                     <div class="listings-content">
                         <!-- Price -->
                         <div class="list-price">
-                            <p>$945 679</p>
+                            <p>Tk{{$property->property_price}}</p>
                         </div>
-                        <h5>Town house with Modern Architecture</h5>
-                        <p class="location"><img src="img/icons/location.png" alt="">Upper Road 3411, no.34 CA</p>
-                        <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odiomattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Etiam nec odio vestibulum est mat tis effic iturut magna. Curabitur rhoncus auctor eleifend. Fusce venenatis diam urna, eu pharetra arcu varius ac. Etiam cursus turpis lectus, id iaculis risus tempor id. Phasellus fringilla nisl sed sem scelerisque, eget aliquam magna vehicula.</p>
+                        <h5>{{$property->title}}</h5>
+                        <p class="location"><img src="../img/icons/location.png" alt="">{{$property->property_area}}</p>
+                        <p>{{$property->description}}</p>
                         <!-- Meta -->
                         <div class="property-meta-data d-flex align-items-end">
                             <div class="new-tag">
-                                <img src="img/icons/new.png" alt="">
+                                <img src="../img/icons/new.png" alt="">
                             </div>
                             <div class="bathroom">
-                                <img src="img/icons/bathtub.png" alt="">
-                                <span>2</span>
+                                <img src="../img/icons/bathtub.png" alt="">
+                                <span>{{$property->bath}}</span>
                             </div>
                             <div class="garage">
-                                <img src="img/icons/garage.png" alt="">
-                                <span>2</span>
+                                <img src="../img/icons/garage.png" alt="">
+                                <span>{{$property->bed}}</span>
                             </div>
                             <div class="space">
-                                <img src="img/icons/space.png" alt="">
-                                <span>120 sq ft</span>
+                                <img src="../img/icons/space.png" alt="">
+                                <span>{{$property->feet}} sq ft</span>
                             </div>
-                        </div>
-                        <!-- Core Features -->
-                        <ul class="listings-core-features d-flex align-items-center">
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Gated Community</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Automatic Sprinklers</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Fireplace</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Window Shutters</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Ocean Views</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Heated Floors</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Heated Floors</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Private Patio</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Window Shutters</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Fireplace</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Beach Access</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Rooftop Terrace</li>
-                        </ul>
-                        <!-- Listings Btn Groups -->
-                        <div class="listings-btn-groups">
-                            <a href="#" class="btn south-btn">See Floor plans</a>
-                            <a href="#" class="btn south-btn active">calculate mortgage</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="contact-realtor-wrapper">
                         <div class="realtor-info">
-                            <img src="img/bg-img/listing.jpg" alt="">
+                            <img src="../users/{{$customer->c_image}}" alt="">
                             <div class="realtor---info">
-                                <h2>Jeremy Scott</h2>
+                                <h2>{{$customer->name}}</h2>
                                 <p>Realtor</p>
-                                <h6><img src="img/icons/phone-call.png" alt=""> +45 677 8993000 223</h6>
-                                <h6><img src="img/icons/envelope.png" alt=""> office@template.com</h6>
-                            </div>
-                            <div class="realtor--contact-form">
-                                <form action="#" method="post">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="realtor-name" placeholder="Your Name">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" id="realtor-number" placeholder="Your Number">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="enumber" class="form-control" id="realtor-email" placeholder="Your Mail">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea name="message" class="form-control" id="realtor-message" cols="30" rows="10" placeholder="Your Message"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn south-btn">Send Message</button>
-                                </form>
+                                <h6><img src="../img/icons/phone-call.png" alt=""> {{$customer->phone}}</h6>
+                                <h6><img src="../img/icons/envelope.png" alt=""> {{$customer->email}}</h6>
                             </div>
                         </div>
                     </div>
@@ -349,8 +257,8 @@
     </section>
     <!-- ##### Listings Content Area End ##### -->
 
-    @endsection
+  @endsection
 
-    @section('title')
-      Single Listings
-    @endsection
+  @section('title')
+    Single Listings
+  @endsection

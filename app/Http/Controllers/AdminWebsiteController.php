@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Http\Requests\HomeRequest;
 use Illuminate\Support\Facades\DB;
 
 class AdminWebsiteController extends Controller
 {
     public function index(){
-      return view('adminWebsite.index');
+      $property = DB::table('property')
+                    ->where('status', 'featured')
+                    ->get();
+      if ($property!=null) {
+        return view('adminWebsite.index', ['property'=>$property]);
+      }else {
+        echo "error viewing main page";
+      }
     }
 
     public function aboutUs(){
@@ -27,7 +35,13 @@ class AdminWebsiteController extends Controller
     }
 
     public function listings(){
-      return view('adminWebsite.listings');
+      $property = DB::table('property')
+                      ->paginate(6);
+      if ($property!=null) {
+        return view('adminWebsite.listings',['property'=> $property]);
+      }else {
+        return redirect('/adminHome');
+      }
     }
 
     public function searchListings(Request $req){
@@ -109,7 +123,8 @@ class AdminWebsiteController extends Controller
       }
       $query->orderBy('property_id', 'asc');
 
-      $property = $query->get();
+
+      $property = $query->paginate(6);
       session()->flashInput($req->input());
       //return view('adminHome.allProperty', ['property'=> $property]);
       return view('adminWebsite.listings', ['property'=> $property]);
@@ -119,8 +134,19 @@ class AdminWebsiteController extends Controller
       return view('adminWebsite.single-blog');
     }
 
-    public function singleListings(){
-      return view('adminWebsite.single-listings');
+    public function singleListings($property_id){
+        $property = DB::table('property')
+                       ->where('property_id', $property_id)
+                       ->get()->first();
+        if ($property!=null) {
+          $customer = DB::table('customer')
+                        ->where('username', $property->username)
+                        ->get()->first();
+           return view('adminWebsite.single-listings',['property'=> $property, 'customer'=>$customer]);
+        }else {
+           return redirect('/adminHome');
+        }
+
     }
 
 }

@@ -244,7 +244,7 @@
                         </div>
                         <!-- Property Content -->
                         <div class="property-content">
-                            <h5><a href="{{route('adminMain.propertyDetail', $p->property_id)}}">{{$p->title}}</a></h5>
+                            <h5><a href="{{route('adminWebsite.singleListings', $p->property_id)}}">{{$p->title}}</a></h5>
                             <p class="location"><img src="img/icons/location.png" alt="">{{$p->property_area}}</p>
                             <div class="property-meta-data d-flex align-items-end justify-content-between">
                                 <div class="new-tag">

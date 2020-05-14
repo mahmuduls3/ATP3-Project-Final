@@ -208,7 +208,7 @@
                         </div>
                         <!-- Property Content -->
                         <div class="property-content">
-                            <h5><a href="{{route('adminMain.propertyDetail', $p->property_id)}}">{{$p->title}}</a></h5>
+                            <h5><a href="{{route('adminWebsite.singleListings', $p->property_id)}}">{{$p->title}}</a></h5>
                             <p class="location"><img src="img/icons/location.png" alt="">{{$p->property_area}}</p>
                             <div class="property-meta-data d-flex align-items-end justify-content-between">
                                 <div class="new-tag">
@@ -233,15 +233,13 @@
                 @endforeach
 
             </div>
-
+            <div>{{$property->links()}}</div>
             <div class="row">
                 <div class="col-12">
                     <div class="south-pagination d-flex justify-content-end">
                         <nav aria-label="Page navigation">
                             <ul class="pagination">
-                                <li class="page-item"><a class="page-link active" href="#">01</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03</a></li>
+
                             </ul>
                         </nav>
                     </div>
