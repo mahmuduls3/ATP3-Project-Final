@@ -1,50 +1,59 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>All Message</title>
-  </head>
-  <body>
-    <h1>All Messages List</h1><br><hr>
-    <a href="{{route('adminHome.index')}}">Home</a><br>
-    <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
-    <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
-    <a href="{{route('adminHome.allMessage')}}">All Message</a><br>
-    <a href="{{route('adminHome.feedback')}}">Customer Feedback</a><br>
-    <a href="{{ URL::previous() }}">Back</a><br>
-    <a href="{{route('adminLogout.index')}}">Logout</a>
-    <br>
+@extends('adminHome/main')
+
+@section('allMessage')
+
     <form method="post">
       {{csrf_field()}}
-      <h3>Search Message</h3>
-      <input type="text" name="from" value="{{old('from')}}" placeholder="Messages From">
-      <input type="text" name="to" value="{{old('to')}}" placeholder="Messages To">
-      <input type="text" name="msg" value="{{old('msg')}}" placeholder="Messages">
-      <select class="" name="orderby">
-        <option  @if (old('orderby') == 'most_recent') selected @endif value="most_recent">Most Recent</option>
-        <option  @if (old('orderby') == 'most_previous') selected @endif value="most_previous">Most Previous</option>
-      </select>
-      <input type="submit" name="search" value="Search">
+      <div class="text-center">
+          <h3>Search Message</h3>
+      </div>
+      <div class="form-group row">
+        <div class="col-xs-2 mr-3">
+          <input type="text" name="from" class="form-control" value="{{old('from')}}" placeholder="Messages From">
+        </div>
+        <div class="col-xs-2 mr-3">
+          <input type="text" name="to" class="form-control" value="{{old('to')}}" placeholder="Messages To">
+        </div>
+        <div class="col-xs-2 mr-3">
+          <input type="text" name="msg" class="form-control" value="{{old('msg')}}" placeholder="Messages">
+        </div>
+        <div class="col-xs-4 mr-3">
+          <select class="form-control mr-5" name="orderby">
+            <option value="">Order By</option>
+            <option  @if (old('orderby') == 'most_recent') selected @endif value="most_recent">Most Recent</option>
+            <option  @if (old('orderby') == 'most_previous') selected @endif value="most_previous">Most Previous</option>
+          </select>
+        </div>
+        <div class="col-xs-2">
+          <button type="submit" class="form-control btn btn-outline-success" name="search">Search</button>
+        </div>
+      </div>
     </form>
     <br>
-    <table>
-      <tr>
-        <th>Message Id</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Message</th>
-        <th>Date</th>
-      </tr>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Message Id</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Message</th>
+          <th>Date</th>
+        </tr>
+      </thead>
       @foreach($message as $m)
-      <tr>
-        <td>{{$m->message_id}}</td>
-        <td><a href="{{route('adminHome.customerDetail', $m->from)}}">{{$m->from}}</a></td>
-        <td><a href="{{route('adminHome.customerDetail', $m->to)}}">{{$m->to}}</a></td>
-        <td>{{$m->msg}}</td>
-        <td>{{$m->msg_date}}</td>
-      </tr>
+      <tbody>
+        <tr>
+          <th>{{$m->message_id}}</th>
+          <td><a href="{{route('adminHome.customerDetail', $m->from)}}"><button type="button" class="btn btn-outline-primary" name="button">{{$m->from}}</button> </a></td>
+          <td><a href="{{route('adminHome.customerDetail', $m->to)}}"><button type="button" class="btn btn-outline-primary" name="button">{{$m->to}}</button> </a></td>
+          <td>{{$m->msg}}</td>
+          <td>{{$m->msg_date}}</td>
+        </tr>
+      </tbody>
       @endforeach
     </table>
-  </body>
-</html>
+@endsection
+
+@section('title')
+  All Message
+@endsection

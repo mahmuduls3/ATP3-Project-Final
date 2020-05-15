@@ -44,7 +44,12 @@ class AdminHomeController extends Controller
                     ->where('from', $username)
                     ->get();
         if ($message!=null) {
-          return view('adminHome.customerDetail',['customer'=> $customer, 'message'=> $message]);
+          $messageFrom = DB::table('message')
+                           ->where('to', $username)
+                           ->get();
+          if ($messageFrom!=null) {
+            return view('adminHome.customerDetail',['customer'=> $customer, 'message'=> $message, 'messageFrom'=>$messageFrom]);
+          }
         }
       }else {
        return redirect('/adminHome');

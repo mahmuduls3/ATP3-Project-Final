@@ -1,23 +1,38 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Registration Page</title>
-  </head>
-  <body>
-    <h1>Registration Page</h1><br>
-    <a href="{{route('adminMain.index')}}">Main</a><br>
-    <a href="{{route('adminLogin.index')}}">Login</a><br>
-    <a href="{{route('adminRegister.index')}}">Register</a><br>
-    <form method="post">
-      {{csrf_field()}}
-      <input type="text" name="username" value="" placeholder="Username" required><br>
-      <input type="password" name="password" value="" placeholder="Password" required><br>
-      <input type="password" name="confirmPassword" value="" placeholder="Confirm Password" required><br>
-      <input type="email" name="email" value="" placeholder="Email" required><br>
-      <input type="number" name="phone" value="" placeholder="Phone" required><br>
-      <input type="submit" name="register" value="Register">
-    </form>
-  </body>
-</html>
+@extends('layout/main')
+
+@section('registration')
+    <section class="breadcumb-area bg-img" style="background-image: url(img/bg-img/hero1.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Registration</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+      <div class="login">
+        <form method="post" enctype="multipart/form-data">
+          {{csrf_field()}}
+          <div class="form-group">
+            <input type="text" name="username" class="form-control" value="" placeholder="Username" required>
+            <input type="password" name="password" class="form-control" value="" placeholder="Password" required>
+            <input type="password" name="confirmPassword" class="form-control" value="" placeholder="Confirm Password" required>
+            <input type="email" name="email" class="form-control" value="" placeholder="Email" required>
+            <input type="number" name="phone" class="form-control" value="" placeholder="Phone" required>
+            <input type="submit" name="register" class="btn btn-success" value="Register">
+          </div>
+        </form>
+      </div>
+    </div>
+    <br><br>
+
+
+@endsection
+
+@section('title')
+  Registration Page
+@endsection

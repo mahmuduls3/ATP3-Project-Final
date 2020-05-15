@@ -92,21 +92,11 @@
                                     </ul>
                                 </li>
                                 <li><a href="{{route('adminWebsite.about-us')}}">About Us</a></li>
-                                <li><a href="">Properties</a></li>
                                 <li><a href="{{route('adminWebsite.blog')}}">Blog</a></li>
                                 <li><a href="{{route('adminWebsite.contact')}}">Contact</a></li>
+                                <li><a href="{{route('adminLogin.index')}}">Login</a></li>
+                                <li><a href="{{route('adminRegister.index')}}">Register</a></li>
                             </ul>
-
-                            <!-- Search Form -->
-                            <div class="south-search-form">
-                                <form action="#" method="post">
-                                    <input type="search" name="search" id="search" placeholder="Search Anything ...">
-                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                </form>
-                            </div>
-
-                            <!-- Search Button -->
-                            <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
                         </div>
                         <!-- Nav End -->
                     </div>
@@ -124,6 +114,8 @@
     @yield('listings')
     @yield('single-blog')
     @yield('single-listings')
+    @yield('login')
+    @yield('registration')
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(img/bg-img/cta.jpg);">

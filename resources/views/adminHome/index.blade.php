@@ -1,64 +1,54 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Home Page</title>
-  </head>
-  <body>
-    <h1>Welcome to Home Page, {{session('username')}}</h1><br><hr>
-    <a href="{{route('adminHome.index')}}">Home</a><br>
-    <a href="{{route('adminHome.addUserIndex')}}">Add User</a><br>
-    <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
-    <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
-    <a href="{{route('adminHome.allMessage')}}">All Message</a><br>
-    <a href="{{route('adminHome.feedback')}}">Customer Feedback</a><br>
-    <a href="{{ URL::previous() }}">Back</a><br>
-    <a href="{{route('adminLogout.index')}}">Logout</a>
-    <br>
-    <h3>All Pending Properties</h3>
-    <table>
-      <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Location</th>
-        <th>Type</th>
-        <th>Purpose</th>
-        <th>Bed</th>
-        <th>Bath</th>
-        <th>SQ FT</th>
-        <th>Floor</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>No. Of Clicks</th>
-        <th>Posted Date</th>
-        <th>Posted By</th>
-        <th>Action</th>
-      </tr>
+@extends('adminHome/main')
+
+@section('index')
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Location</th>
+          <th scope="col">Type</th>
+          <th scope="col">Purpose</th>
+          <th scope="col">Bed</th>
+          <th scope="col">Bath</th>
+          <th scope="col">SQ FT</th>
+          <th scope="col">Floor</th>
+          <th scope="col">Status</th>
+          <th scope="col">No. Of Clicks</th>
+          <th scope="col">Posted Date</th>
+          <th scope="col">Posted By</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
       @foreach($property as $p)
-      <tr>
-        <td>{{$p->property_id}}</td>
-        <td><a href="{{route('adminHome.propertyDetail', $p->property_id)}}">{{$p->title}}</a></td>
-        <td>{{$p->property_price}}</td>
-        <td>{{$p->property_area}}</td>
-        <td>{{$p->p_type}}</td>
-        <td>{{$p->style}}</td>
-        <td>{{$p->bed}}</td>
-        <td>{{$p->bath}}</td>
-        <td>{{$p->feet}}</td>
-        <td>{{$p->floor}}</td>
-        <td>{{$p->description}}</td>
-        <td>{{$p->status}}</td>
-        <td>{{$p->no_of_clicks}}</td>
-        <td>{{$p->date}}</td>
-        <td><a href="{{route('adminHome.customerDetail', $p->username)}}">{{$p->username}}</a> </td>
-        <td>
-          <a href="{{route('adminHome.accept', $p->property_id)}}">Accept</a> |
-          <a href="{{route('adminHome.deny', $p->property_id)}}">Deny</a>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <th scope="col">{{$p->property_id}}</th>
+          <td><a href="{{route('adminHome.propertyDetail', $p->property_id)}}">{{$p->title}}</a></td>
+          <td>{{$p->property_price}}</td>
+          <td>{{$p->property_area}}</td>
+          <td>{{$p->p_type}}</td>
+          <td>{{$p->style}}</td>
+          <td>{{$p->bed}}</td>
+          <td>{{$p->bath}}</td>
+          <td>{{$p->feet}}</td>
+          <td>{{$p->floor}}</td>
+          <td>{{$p->status}}</td>
+          <td>{{$p->no_of_clicks}}</td>
+          <td>{{$p->date}}</td>
+          <td><a href="{{route('adminHome.customerDetail', $p->username)}}"><button type="button" class="btn btn-outline-primary" name="button">{{$p->username}}</button></a> </td>
+          <td>
+            <a href="{{route('adminHome.accept', $p->property_id)}}"><button type="button" class="btn btn-outline-success mb-3" name="button">Accept</button> </a>
+            <a href="{{route('adminHome.deny', $p->property_id)}}"><button type="button" class="btn btn-outline-danger" name="button">Deny</button> </a>
+          </td>
+        </tr>
+      </tbody>
       @endforeach
     </table>
-  </body>
-</html>
+@endsection
+
+@section('title')
+  All Pending Properties
+@endsection

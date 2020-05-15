@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
     <title>@yield('title')</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="../img/core-img/favicon.ico">
 
     <!-- Style CSS -->
-   <!--  <link rel="stylesheet"href="../abc/style.css"> -->
-   <link href="../style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../style.css">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
-<body>
+  <body>
+
     <!-- Preloader -->
     <div id="preloader">
         <div class="south-load"></div>
@@ -72,31 +71,18 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{route('adminWebsite.index')}}">Home</a></li>
-                                <li><a href="#">Pages</a>
+                                <li><a href="{{route('adminHome.index')}}">Home</a></li>
+                                <li><a href="{{route('adminHome.addUserIndex')}}">Add User</a></li>
+                                <li><a href="#">Listings</a>
                                     <ul class="dropdown">
-                                        <li><a href="{{route('adminWebsite.index')}}">Home</a></li>
-                                        <li><a href="{{route('adminWebsite.about-us')}}">About Us</a></li>
-                                        <li><a href="#">Listings</a>
-                                            <ul class="dropdown">
-                                                <li><a href="{{route('adminWebsite.listings')}}">Listings</a></li>
-
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Blog</a>
-                                            <ul class="dropdown">
-                                                <li><a href="{{route('adminWebsite.blog')}}">Blog</a></li>
-                                                <li><a href="{{route('adminWebsite.singleBlog')}}">Single Blog</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="{{route('adminWebsite.contact')}}">Contact</a></li>
-                                        <li><a href="{{route('adminWebsite.elements')}}">Elements</a></li>
+                                      <li><a href="{{route('adminHome.allCustomer')}}">All Customers</a>
+                                      <li><a href="{{route('adminHome.allProperty')}}">All Property</a></li>
+                                      <li><a href="{{route('adminHome.allMessage')}}">All Message</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{route('adminWebsite.about-us')}}">About Us</a></li>
-                                <li><a href="">Properties</a></li>
-                                <li><a href="{{route('adminWebsite.blog')}}">Blog</a></li>
-                                <li><a href="{{route('adminWebsite.contact')}}">Contact</a></li>
+                                <li><a href="{{route('adminHome.feedback')}}">Customer Feedback</a></li>
+                                <li><a href="{{ URL::previous() }}">Back</a></li>
+                                <li><a href="{{route('adminLogout.index')}}">Logout</a></li>
                             </ul>
                         </div>
                         <!-- Nav End -->
@@ -107,17 +93,56 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
-    @yield('index')
-    @yield('about-us')
-    @yield('blog')
-    @yield('contact')
-    @yield('elements')
-    @yield('listings')
-    @yield('single-blog')
-    @yield('single-listings')
+    <section class="breadcumb-area bg-img" style="background-image: url(../img/bg-img/hero1.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">@yield('title')</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="container">
+      <!--
+      <h1 class="text-center">Welcome to Home Page, {{session('username')}}</h1><br><hr>
+      <div class="pull-right">
+        <a href="{{route('adminHome.index')}}"><button type="button"  class="btn btn-outline-info mr-3 mb-3" name="button">Home</button> </a>
+        <a href="{{route('adminHome.addUserIndex')}}"><button type="button"  class="btn btn-outline-info mr-3 mb-3" name="button">Add User</button></a>
+        <a href="{{route('adminHome.allCustomer')}}"><button type="button"  class="btn btn-outline-info mr-3 mb-3" name="button">All Customer</button></a>
+        <a href="{{route('adminHome.allProperty')}}"><button type="button"  class="btn btn-outline-info mr-3 mb-3" name="button">All Property</button></a>
+        <a href="{{route('adminHome.allMessage')}}"><button type="button"  class="btn btn-outline-info mr-3 mb-3" name="button">All Message</button></a>
+        <a href="{{route('adminHome.feedback')}}"><button type="button"  class="btn btn-outline-info mr-3 mb-3" name="button">Customer Feedback</button></a>
+        <a href="{{ URL::previous() }}"><button type="button"  class="btn btn-outline-info mr-3 mb-3" name="button">Back</button></a>
+        <a href="{{route('adminLogout.index')}}"><button type="button"  class="btn btn-outline-info mr-3 mb-3" name="button">Logout</button></a>
+      </div>
+    -->
+
+
+      <br><br>
+
+      @yield('index')
+      @yield('allCustomer')
+      @yield('customerDetail')
+      @yield('activePosts')
+      @yield('soldPosts')
+      @yield('pendingPosts')
+      @yield('totalPosts')
+      @yield('allProperty')
+      @yield('allMessage')
+      @yield('feedback')
+      @yield('addUser')
+
+      <br><br><br>
+
+    </div>
 
     <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(img/bg-img/cta.jpg);">
+    <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(../img/bg-img/cta.jpg);">
         <!-- Main Footer Area -->
         <div class="main-footer-area">
             <div class="container">
@@ -131,7 +156,7 @@
                                 <h6>About Us</h6>
                             </div>
 
-                            <img src="../img/bg-img/footer.jpg" alt="">
+                            <img src="img/bg-img/footer.jpg" alt="">
                             <div class="footer-logo my-4">
                                 <img src="../img/core-img/logo.png" alt="">
                             </div>
@@ -227,21 +252,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     </footer>
     <!-- ##### Footer Area End ##### -->
 
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Popper js -->
-    <script src="/js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="/js/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="/js/plugins.js"></script>
-    <script src="/js/classy-nav.min.js"></script>
-    <script src="/js/jquery-ui.min.js"></script>
-    <!-- Active js -->
-    <script src="/js/active.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
-    <script src="js/map-active.js"></script>
 
-</body>
 
+        <!-- jQuery (Necessary for All JavaScript Plugins) -->
+        <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+        <!-- Popper js -->
+        <script src="../js/popper.min.js"></script>
+        <!-- Bootstrap js -->
+        <script src="../js/bootstrap.min.js"></script>
+        <!-- Plugins js -->
+        <script src="../js/plugins.js"></script>
+        <script src="../js/classy-nav.min.js"></script>
+        <script src="../js/jquery-ui.min.js"></script>
+        <!-- Active js -->
+        <script src="../js/active.js"></script>
+        <!-- Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+        <script src="../js/map-active.js"></script>
+
+
+  </body>
 </html>
