@@ -1,83 +1,91 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Property Detail Page</title>
-  </head>
-  <body>
-    <a href="{{route('adminHome.index')}}">Home</a><br>
-    <a href="{{route('adminHome.allCustomer')}}">All Customer</a><br>
-    <a href="{{route('adminHome.allProperty')}}">All Property</a><br>
-    <a href="{{route('adminHome.allMessage')}}">All Message</a><br>
-    <a href="{{route('adminHome.feedback')}}">Customer Feedback</a><br>
-    <a href="{{ URL::previous() }}">Back</a><br>
-    <a href="{{route('adminLogout.index')}}">Logout</a>
-    <br>
-    <table>
-      <tr>
-        <td>Property Id:</td>
-        <td>{{$property->property_id}}</td>
-      </tr>
-      <tr>
-        <td> Title:</td>
-        <td> {{$property->title}} </td>
-      </tr>
-      <tr>
-        <td>Location:</td>
-        <td>{{$property->property_area}}</td>
-      </tr>
-      <tr>
-        <td>Price:</td>
-        <td>{{$property->property_price}}</td>
-      </tr>
-      <tr>
-        <td>Type:</td>
-        <td>{{$property->p_type}}</td>
-      </tr>
-      <tr>
-        <td>Purpose:</td>
-        <td>{{$property->style}}</td>
-      </tr>
-      <tr>
-        <td>Bed:</td>
-        <td>{{$property->bed}}</td>
-      </tr>
-      <tr>
-        <td>Bath:</td>
-        <td>{{$property->bath}}</td>
-      </tr>
-      <tr>
-        <td>Floor:</td>
-        <td>{{$property->floor}}</td>
-      </tr>
-      <tr>
-        <td>Sq Ft:</td>
-        <td>{{$property->feet}}</td>
-      </tr>
-      <tr>
-        <td>Description:</td>
-        <td>{{$property->description}}</td>
-      </tr>
-      <tr>
-        <td>Status:</td>
-        <td>{{$property->status}}</td>
-      </tr>
-      <tr>
-        <td>No. Of Clicks:</td>
-        <td>{{$property->no_of_clicks}}</td>
-      </tr>
-      <tr>
-        <td>Date:</td>
-        <td>{{$property->date}}</td>
-      </tr>
-      <tr>
-        <td>Posted By:</td>
-        <td> <a href="{{route('adminHome.customerDetail', $property->username)}}">{{$property->username}}</a> </td>
-      </tr>
-    </table>
-    <h3>Do you want to accept this post?</h3>
-    <a href="{{route('adminHome.accept', $property->property_id)}}">Accept</a> |
-    <a href="{{route('adminHome.deny', $property->property_id)}}">Deny</a>
-  </body>
-</html>
+@extends('adminHome/main')
+
+  @section('pendingPropertyDetail')
+
+    <!-- ##### Listings Content Area Start ##### -->
+    <section class="listings-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Single Listings Slides -->
+                    <div class="single-listings-sliders owl-carousel">
+                        <!-- Single Slide -->
+                        <img src="../img/bg-img/hero4.jpg" alt="">
+                        <!-- Single Slide -->
+                        <img src="../img/bg-img/hero5.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="listings-content">
+                        <h5>Property Id: {{$property->property_id}}</h5>
+                        <h5>Type: {{$property->p_type}}</h5>
+                        <h5>Purpose: {{$property->style}}</h5>
+                        <h5>Purpose: {{$property->status}}</h5>
+                        <h5>Title: {{$property->title}}</h5>
+                        <!-- Price -->
+                        <div class="list-price">
+                            <p>Tk{{$property->property_price}}</p>
+                        </div>
+
+                        <p class="location"><img src="../img/icons/location.png" alt="">{{$property->property_area}}</p>
+                        <p>{{$property->description}}</p>
+                        <!-- Meta -->
+                        <div class="property-meta-data d-flex align-items-end">
+                            <div class="new-tag">
+                                <img src="../img/icons/new.png" alt="">
+                            </div>
+                            <div class="bathroom">
+                                <img src="../img/icons/bathtub.png" alt="">
+                                <span>{{$property->bath}}</span>
+                            </div>
+                            <div class="garage">
+                                <img src="../img/icons/bed.png" alt="">
+                                <span>{{$property->bed}}</span>
+                            </div>
+                            <div class="space">
+                                <img src="../img/icons/space.png" alt="">
+                                <span>{{$property->feet}} sq ft</span>
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <h2>Do you want to</h2>
+
+                        <h2> <a href="{{route('adminHome.accept', $property->property_id)}}"> <button type="button" class="btn btn-outline-success" name="button">Accept</button> <a> </h2>
+                        <h2> <a href="{{route('adminHome.deny', $property->property_id)}}"> <button type="button" class="btn btn-outline-danger" name="button">Deny</button> <a> </h2>
+
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="contact-realtor-wrapper">
+                        <div class="realtor-info">
+                            <img src="../users/{{$customer->c_image}}" alt="">
+                            <div class="realtor---info">
+                                <h2><a href="{{route('adminHome.customerDetail', $customer->username)}}"><button type="button" name="button" class="btn btn-outline-primary">{{$customer->name}}</button> </a> </h2>
+                                <p>Realtor</p>
+                                <h6><img src="../img/icons/phone-call.png" alt=""> {{$customer->phone}}</h6>
+                                <h6><img src="../img/icons/envelope.png" alt=""> {{$customer->email}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Listing Maps -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="listings-maps mt-100">
+                        <div id="googleMap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Listings Content Area End ##### -->
+
+  @endsection
+
+  @section('title')
+    Pending Property Detail
+  @endsection

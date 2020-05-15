@@ -62,6 +62,8 @@ Route::group(['middleware'=>['sessionVerify', 'typeCheck']], function(){
   Route::post('/adminAddUserIndex', 'AdminHomeController@addUser')->name('adminHome.addUser');
   Route::get('/adminEditUserIndex/{username}', 'AdminHomeController@editUserIndex')->name('adminHome.editUserIndex');
   Route::post('/adminEditUserIndex/{username}', 'AdminHomeController@editUser')->name('adminHome.editUser');
+  Route::get('/adminDeleteUserIndex/{username}', 'AdminHomeController@deleteUserIndex')->name('adminHome.deleteUserIndex');
+  Route::post('/adminDeleteUserIndex/{username}', 'AdminHomeController@deleteUser')->name('adminHome.deleteUser');
   Route::get('/adminFeedback', 'AdminHomeController@feedbackIndex')->name('adminHome.feedbackIndex');
   Route::post('/adminFeedback', 'AdminHomeController@feedback')->name('adminHome.feedback');
   Route::get('/changeStatusToFeatured/{id}', 'AdminHomeController@toFeatured')->name('adminHome.toFeatured');

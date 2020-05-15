@@ -15,7 +15,7 @@
           <input type="text" name="msg" class="form-control" value="{{old('msg')}}" placeholder="Messages">
         </div>
         <div class="col-xs-2 mr-3">
-          <select class="form-control" name="orderby">
+          <select class="form-control mr-3" name="orderby">
             <option  @if (old('orderby') == 'most_recent') selected @endif value="most_recent">Most Recent</option>
             <option  @if (old('orderby') == 'most_previous') selected @endif value="most_previous">Most Previous</option>
           </select>

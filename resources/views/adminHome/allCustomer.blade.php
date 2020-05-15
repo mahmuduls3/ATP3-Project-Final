@@ -20,7 +20,7 @@
           <input type="text" name="email" class="form-control" value="{{old('email')}}" placeholder="Email">
         </div>
         <div class="col-xs-2 mr-3">
-          <select name="type" class="form-control mr-3">
+          <select name="type" class="form-control mr-5">
             <option value="">Type</option>
             <option @if (old('type') == 'admin') selected @endif value="admin">Admin</option>
             <option @if (old('type') == 'moderator') selected @endif value="moderator">Moderator</option>

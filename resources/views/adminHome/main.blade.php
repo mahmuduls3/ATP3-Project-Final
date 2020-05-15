@@ -136,6 +136,10 @@
       @yield('allMessage')
       @yield('feedback')
       @yield('addUser')
+      @yield('editUser')
+      @yield('deleteUser')
+      @yield('propertyDetail')
+      @yield('pendingPropertyDetail')
 
       <br><br><br>
 

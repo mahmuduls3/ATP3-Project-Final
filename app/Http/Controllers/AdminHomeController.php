@@ -126,10 +126,15 @@ class AdminHomeController extends Controller
                      ->where('property_id', $property_id)
                      ->get()->first();
       if ($property!=null) {
-        if ($property->status == 'pending') {
-          return view('adminHome.pendingPropertyDetail',['property'=>$property]);
-        } else {
-          return view('adminHome.propertyDetail',['property'=> $property]);
+        $customer = DB::table('customer')
+                      ->where('username', $property->username)
+                      ->get()->first();
+        if ($customer) {
+          if ($property->status == 'pending') {
+            return view('adminHome.pendingPropertyDetail',['property'=>$property, 'customer'=>$customer]);
+          } else {
+            return view('adminHome.propertyDetail',['property'=> $property, 'customer'=>$customer]);
+          }
         }
       }else {
         return redirect('/adminHome');
@@ -459,11 +464,32 @@ class AdminHomeController extends Controller
                     ->where('username', $username)
                     ->update($update);
                     //->update(['type'=>$type, 'name'=>$name, 'email'=> $email, 'phone'=>$phone]);
-      if ($customer) {
         return redirect()->route('adminHome.customerDetail', $username);
-      } else {
-        return redirect()->route('adminHome.index');
+    }
+
+    public function deleteUserIndex($username){
+      $customer = DB::table('customer')
+                     ->select('customer_id', 'c_image', 'username', 'name', 'type', 'email', 'phone')
+                     ->where('username', $username)
+                     ->get()->first();
+      if ($customer) {
+        return view('adminHome.deleteUserIndex', ['customer'=>$customer]);
       }
+    }
+
+    public function deleteUser($username){
+      $customer = DB::table('customer')
+                    ->where('username', $username)
+                    ->delete();
+                    //->update(['type'=>$type, 'name'=>$name, 'email'=> $email, 'phone'=>$phone]);
+        if ($customer) {
+          $property = DB::table('property')
+                        ->where('username', $username)
+                        ->delete();
+          if ($property) {
+            return redirect()->route('adminHome.allCustomer');
+          }
+        }
     }
 
     public function feedbackIndex(){
@@ -510,14 +536,7 @@ class AdminHomeController extends Controller
                      ->where('property_id', $id)
                      ->update(['status'=>'featured']);
       if ($p!=null) {
-        $property = DB::table('property')
-                       ->where('property_id', $id)
-                       ->get()->first();
-        if ($property!=null) {
-          return view('adminHome.propertyDetail', ['property'=>$property]);
-        }else {
-          return redirect('/adminHome');
-        }
+        return redirect()->route('adminHome.propertyDetail', $id);
       }else {
         return redirect('/adminHome');
       }
@@ -528,14 +547,7 @@ class AdminHomeController extends Controller
                      ->where('property_id', $id)
                      ->update(['status'=>'allowed']);
       if ($p!=null) {
-        $property = DB::table('property')
-                       ->where('property_id', $id)
-                       ->get()->first();
-        if ($property!=null) {
-          return view('adminHome.propertyDetail', ['property'=>$property]);
-        }else {
-          return redirect('/adminHome');
-        }
+        return redirect()->route('adminHome.propertyDetail', $id);
       }else {
         return redirect('/adminHome');
       }

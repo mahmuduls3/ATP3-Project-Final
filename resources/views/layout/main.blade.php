@@ -71,29 +71,7 @@
                         <div class="classynav">
                             <ul>
                                 <li><a href="{{route('adminWebsite.index')}}">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{route('adminWebsite.index')}}">Home</a></li>
-                                        <li><a href="{{route('adminWebsite.about-us')}}">About Us</a></li>
-                                        <li><a href="#">Listings</a>
-                                            <ul class="dropdown">
-                                                <li><a href="{{route('adminWebsite.listings')}}">Listings</a></li>
-
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Blog</a>
-                                            <ul class="dropdown">
-                                                <li><a href="{{route('adminWebsite.blog')}}">Blog</a></li>
-                                                <li><a href="{{route('adminWebsite.singleBlog')}}">Single Blog</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="{{route('adminWebsite.contact')}}">Contact</a></li>
-                                        <li><a href="{{route('adminWebsite.elements')}}">Elements</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{route('adminWebsite.about-us')}}">About Us</a></li>
-                                <li><a href="{{route('adminWebsite.blog')}}">Blog</a></li>
-                                <li><a href="{{route('adminWebsite.contact')}}">Contact</a></li>
+                                <li><a href="{{route('adminWebsite.listings')}}">Listings</a></li>
                                 <li><a href="{{route('adminLogin.index')}}">Login</a></li>
                                 <li><a href="{{route('adminRegister.index')}}">Register</a></li>
                             </ul>
