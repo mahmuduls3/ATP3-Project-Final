@@ -20,8 +20,8 @@
         {{csrf_field()}}
         <div class="form-group">
           <br>
-          <input type="text" name="username" class="form-control" value="" placeholder="Username">
-          <input type="password" name="password" class="form-control" value="" placeholder="Password">
+          <input type="text" name="username" class="form-control" value="" placeholder="Username" required>
+          <input type="password" name="password" class="form-control" value="" placeholder="Password" required>
         </div>
         <input type="submit" class="btn btn-success" name="login" value="Login">
       </form>

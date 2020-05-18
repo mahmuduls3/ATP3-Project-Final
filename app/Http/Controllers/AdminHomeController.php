@@ -130,10 +130,15 @@ class AdminHomeController extends Controller
                       ->where('username', $property->username)
                       ->get()->first();
         if ($customer) {
-          if ($property->status == 'pending') {
-            return view('adminHome.pendingPropertyDetail',['property'=>$property, 'customer'=>$customer]);
-          } else {
-            return view('adminHome.propertyDetail',['property'=> $property, 'customer'=>$customer]);
+          $picture = DB::table('property_picture')
+                       ->where('property_id', $property_id)
+                       ->get();
+          if ($picture) {
+            if ($property->status == 'pending') {
+              return view('adminHome.pendingPropertyDetail',['property'=>$property, 'customer'=>$customer, 'picture'=>$picture]);
+            } else {
+              return view('adminHome.propertyDetail',['property'=> $property, 'customer'=>$customer, 'picture'=>$picture]);
+            }
           }
         }
       }else {
@@ -550,6 +555,28 @@ class AdminHomeController extends Controller
         return redirect()->route('adminHome.propertyDetail', $id);
       }else {
         return redirect('/adminHome');
+      }
+    }
+
+    public function sendMessageIndex($username){
+      $customer = DB::table('customer')
+                    ->where('username', $username)
+                    ->get()->first();
+      if ($customer) {
+        return view('adminHome.sendMessage', ['customer'=>$customer]);
+      }
+    }
+
+    public function sendMessage(Request $req, $username){
+      $msg = $req->message;
+      $message = DB::table('message')
+                    ->insert([
+                      ['from' => 'admin', 'to' => $username, 'msg' => $msg, 'msg_date' => date("Y-m-d")]
+                    ]);
+      if ($message) {
+        return redirect()->route('adminHome.customerDetail', $username);
+      } else {
+        return redirect()->route('adminHome.index');
       }
     }
 

@@ -68,4 +68,6 @@ Route::group(['middleware'=>['sessionVerify', 'typeCheck']], function(){
   Route::post('/adminFeedback', 'AdminHomeController@feedback')->name('adminHome.feedback');
   Route::get('/changeStatusToFeatured/{id}', 'AdminHomeController@toFeatured')->name('adminHome.toFeatured');
   Route::get('/changeStatusToAllowed/{id}', 'AdminHomeController@toAllowed')->name('adminHome.toAllowed');
+  Route::get('/adminSendMessage/{username}', 'AdminHomeController@sendMessageIndex')->name('adminHome.sendMessageIndex');
+  Route::post('/adminSendMessage/{username}', 'AdminHomeController@sendMessage')->name('adminHome.sendMessage');
 });

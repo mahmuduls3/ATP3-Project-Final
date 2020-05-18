@@ -140,6 +140,7 @@
       @yield('deleteUser')
       @yield('propertyDetail')
       @yield('pendingPropertyDetail')
+      @yield('sendMessage')
 
       <br><br><br>
 

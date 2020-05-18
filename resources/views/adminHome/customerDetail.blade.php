@@ -6,6 +6,8 @@
     <div class="pull-right">
       <a href="{{route('adminHome.editUserIndex', $customer->username)}}"><button type="button" class="btn btn-outline-warning mb-3" name="button">Edit</button></a>
       <a href="{{route('adminHome.deleteUserIndex', $customer->username)}}"><button type="button" class="btn btn-outline-danger mb-3" name="button">Delete</button></a>
+      <br>
+      <a href="{{route('adminHome.sendMessageIndex', $customer->username)}}"><button type="button" class="btn btn-outline-info" name="button">Send Message</button> </a>
     </div>
 
     <div class="row justify-content-center">

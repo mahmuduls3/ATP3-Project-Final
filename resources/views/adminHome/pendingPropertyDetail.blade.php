@@ -10,9 +10,10 @@
                     <!-- Single Listings Slides -->
                     <div class="single-listings-sliders owl-carousel">
                         <!-- Single Slide -->
-                        <img src="../img/bg-img/hero4.jpg" alt="">
+                        @foreach($picture as $p)
+                        <img src="../{{$p->image}}" alt="">
+                        @endforeach
                         <!-- Single Slide -->
-                        <img src="../img/bg-img/hero5.jpg" alt="">
                     </div>
                 </div>
             </div>

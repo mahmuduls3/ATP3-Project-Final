@@ -142,7 +142,15 @@ class AdminWebsiteController extends Controller
           $customer = DB::table('customer')
                         ->where('username', $property->username)
                         ->get()->first();
-           return view('adminWebsite.single-listings',['property'=> $property, 'customer'=>$customer]);
+          if ($customer) {
+            $picture = DB::table('property_picture')
+                         ->where('property_id', $property_id)
+                         ->get();
+            if ($picture) {
+              return view('adminWebsite.single-listings',['property'=> $property, 'customer'=>$customer, 'picture'=>$picture]);
+            }
+          }
+
         }else {
            return redirect('/adminHome');
         }
